@@ -37,7 +37,12 @@ public partial class InputAppTheme : IDisposable
 
         if (Guid.TryParse(guidAsString, out var guidValue))
         {
-            var existingThemeRecord = themeState.ThemeRecordsList
+            var themesInScope = themeState.ThemeRecordsList
+                .Where(x => 
+                    x.ThemeScopes.Contains(ThemeScope.App))
+                .ToArray();
+            
+            var existingThemeRecord = themesInScope
                 .FirstOrDefault(btr => btr.ThemeKey.Guid == guidValue);
 
             if (existingThemeRecord is not null)
@@ -46,10 +51,10 @@ public partial class InputAppTheme : IDisposable
     }
  
     private bool CheckIsActiveValid(
-        ImmutableList<ThemeRecord> themeRecordsList, 
+        ThemeRecord[] themeRecords, 
         ThemeKey activeThemeKey)
     {
-        return themeRecordsList.Any(
+        return themeRecords.Any(
             btr => 
                 btr.ThemeKey == activeThemeKey);
     }

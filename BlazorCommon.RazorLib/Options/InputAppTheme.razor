@@ -3,6 +3,11 @@
     @{
         var themeState = ThemeRecordsCollectionService.ThemeRecordsCollectionWrap.Value;
         var applicationOptionsState = AppOptionsService.AppOptionsStateWrap.Value;
+
+        var themesInScope = themeState.ThemeRecordsList
+            .Where(x => 
+                x.ThemeScopes.Contains(ThemeScope.App))
+            .ToArray();
     }
     
     Theme:&nbsp;
@@ -11,13 +16,13 @@
         
         <option value="@Guid.Empty.ToString()"
                 selected="@CheckIsActiveValid(
-                              themeState.ThemeRecordsList,
+                              themesInScope,
                               applicationOptionsState.Options.ThemeKey
                                 ?? ThemeFacts.VisualStudioDarkThemeClone.ThemeKey)">
             Select a Theme
         </option>
         
-        @foreach (var themeRecord in themeState.ThemeRecordsList)
+        @foreach (var themeRecord in themesInScope)
         {
             <option value="@themeRecord.ThemeKey.Guid.ToString()"
                     selected="@CheckIsActiveSelection(
