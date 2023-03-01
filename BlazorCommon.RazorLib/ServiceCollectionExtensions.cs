@@ -34,6 +34,7 @@ public static class ServiceCollectionExtensions
         
         return services
             .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
+            .AddSingleton<ExtensionInitializersCollection>()
             .AddScoped<IDialogService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.DialogServiceFactory.Invoke(serviceProvider))
             .AddScoped<INotificationService>(serviceProvider => 
@@ -57,14 +58,8 @@ public static class ServiceCollectionExtensions
         IServiceProvider serviceProvider,
         ExtensionInitializer extensionInitializer)
     {
-        var extensionInitializers = serviceProvider.GetService<ExtensionInitializersCollection>();
+        var extensionInitializers = serviceProvider.GetRequiredService<ExtensionInitializersCollection>();
 
-        if (extensionInitializers is null)
-        {
-            extensionInitializers = new ExtensionInitializersCollection();
-            services.AddSingleton<ExtensionInitializersCollection>();
-        }
-        
         extensionInitializers.Add(extensionInitializer);
 
         return services;
