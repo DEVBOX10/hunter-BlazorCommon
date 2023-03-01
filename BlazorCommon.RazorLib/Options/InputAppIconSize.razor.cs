@@ -16,7 +16,7 @@ public partial class InputAppIconSize : ComponentBase, IDisposable
     private int IconSizeInPixels
     {
         get => AppOptionsService.AppOptionsStateWrap.Value.Options.IconSizeInPixels ??
-               AppOptionsState.MINIMUM_ICON_SIZE_IN_PIXELS;
+               AppOptionsState.DEFAULT_ICON_SIZE_IN_PIXELS;
         set
         {
             if (value < AppOptionsState.MINIMUM_ICON_SIZE_IN_PIXELS)
