@@ -1,10 +1,5 @@
-﻿:root {
-    /* Sizes */
-    --bcrl_drag-display-z-index: 30;
-}
-
-.bcrl_drag-display {
-    z-index: var(--bcrl_drag-display-z-index);
+﻿.bcrl_drag-initializer {
+    z-index: var(--bcrl_drag-initializer-z-index);
     width: 100vw;
     height: 100vh;
     position: fixed;

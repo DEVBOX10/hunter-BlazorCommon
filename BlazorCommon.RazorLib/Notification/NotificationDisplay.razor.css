@@ -1,19 +1,4 @@
-﻿:root {
-    /* Colors */
-
-    --bcrl_notification-display-background-color: #2d2f34;
-    --bcrl_notification-display-toolbar-background-color: #071c57;
-}
-
-:root {
-    /* Sizes */
-
-    --bcrl_notification-display-z-index: 15;
-    --bcrl_notification-display-box-shadow-blur-radius: 2px;
-    --bcrl_notification-display-toolbar-height: 2rem;
-}
-
-.bcrl_notification {
+﻿.bcrl_notification {
     position: fixed;
     z-index: var(--bcrl_notification-display-z-index);
     color: var(--bcrl_secondary-foreground-color);
@@ -39,13 +24,3 @@
     height: calc(100% - var(--bcrl_notification-display-toolbar-height));
     overflow: auto;
 }
-
-:root {
-    /* Sizes */
-    --bcrl_notification-display-z-index: 15;
-    --bcrl_notification-display-box-shadow-blur-radius: 2px;
-    --bcrl_notification-display-toolbar-height: 2rem;
-}
-
-
-
