@@ -1,4 +1,5 @@
-﻿using BlazorCommon.RazorLib.Dialog;
+﻿using BlazorCommon.RazorLib.Clipboard;
+using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Drag;
 using BlazorCommon.RazorLib.Dropdown;
 using BlazorCommon.RazorLib.Notification;
@@ -35,6 +36,8 @@ public static class ServiceCollectionExtensions
         return services
             .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
             .AddSingleton<ExtensionInitializersCollection>()
+            .AddScoped<IClipboardService>(serviceProvider => 
+                blazorCommonOptions.BlazorCommonFactories.ClipboardServiceFactory.Invoke(serviceProvider))
             .AddScoped<IDialogService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.DialogServiceFactory.Invoke(serviceProvider))
             .AddScoped<INotificationService>(serviceProvider => 

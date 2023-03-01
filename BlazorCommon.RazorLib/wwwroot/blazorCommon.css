@@ -203,10 +203,21 @@
     user-select: text;
 }
 
-.bcrl_indent-child-content {
+.bsrl_settings-scope-body {
+    position: relative;
     padding-left: 12px;
-    border-left: 2px solid var(--bcrl_primary-border-color);
-    margin-bottom: 6px;
+}
+
+.bsrl_settings-scope-border {
+    padding: 0 !important;
+    background-color: var(--bcrl_primary-border-color);
+    opacity: 0.7;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    margin-left: 6px;
 }
 
 ul.bcrl_indent-child-content {
@@ -377,7 +388,7 @@ ul.bcrl_indent-child-content {
     --bcrl_primary-font-color: black;
     --bcrl_primary-border-color: black;
     --bcrl_dialog-toolbar-foreground-color: var(--bcrl_primary-foreground-color);
-    --bcrl_dialog-toolbar-background-color: #071c57;
+    --bcrl_dialog-toolbar-background-color: #aac1ee;
     --bcrl_dialog-display-background-color: rgb(252, 252, 245);
     --bcrl_primary-box-shadow-color: #000000;
     --balc-primary-outline-color: #ADD6FF;

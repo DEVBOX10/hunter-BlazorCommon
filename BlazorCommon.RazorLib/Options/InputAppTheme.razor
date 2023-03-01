@@ -1,5 +1,7 @@
 ﻿@using BlazorCommon.RazorLib.Theme
-<div class="bcrl_theme-select-theme">
+
+<div class="bcrl_settings-input bcrl_input-app-options-theme @CssClassString"
+     style="@CssStyleString">
     @{
         var themeState = ThemeRecordsCollectionService.ThemeRecordsCollectionWrap.Value;
         var applicationOptionsState = AppOptionsService.AppOptionsStateWrap.Value;
@@ -12,7 +14,7 @@
     
     Theme:&nbsp;
     
-    <select @onchange="OnThemeSelectChanged" class="@InputElementCssClass">
+    <select @onchange="OnThemeSelectChanged" class="bcrl_select">
         
         <option value="@Guid.Empty.ToString()"
                 selected="@CheckIsActiveValid(
