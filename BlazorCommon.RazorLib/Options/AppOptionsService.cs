@@ -1,4 +1,5 @@
-﻿using BlazorCommon.RazorLib.Storage;
+﻿using BlazorCommon.RazorLib.Dimensions;
+using BlazorCommon.RazorLib.Storage;
 using BlazorCommon.RazorLib.Store.ApplicationOptions;
 using BlazorCommon.RazorLib.Store.StorageCase;
 using BlazorCommon.RazorLib.Store.ThemeCase;
@@ -32,13 +33,26 @@ public class AppOptionsService : IAppOptionsService
 
     public string StorageKey => "blazor-common_theme-storage-key";
 
-    public string GlobalThemeCssClassString => ThemeRecordsCollectionWrap.Value.ThemeRecordsList
+    public string ThemeCssClassString => ThemeRecordsCollectionWrap.Value.ThemeRecordsList
                                                    .FirstOrDefault(x =>
                                                        x.ThemeKey == AppOptionsStateWrap.Value.Options
                                                            .ThemeKey)
                                                    ?.CssClassString
                                                ?? ThemeFacts.VisualStudioDarkThemeClone.CssClassString;
     
+    public string FontSizeCssStyleString
+    {
+        get
+        {
+            var fontSizeInPixels = AppOptionsStateWrap.Value.Options.FontSizeInPixels ??
+                                   AppOptionsState.DEFAULT_FONT_SIZE_IN_PIXELS;
+
+            var fontSizeInPixelsCssValue = fontSizeInPixels.ToCssValue();
+            
+            return $"font-size: {fontSizeInPixelsCssValue}px;";
+        }
+    }
+
     public void SetActiveThemeRecordKey(
         ThemeKey themeKey,
         bool updateStorage = true)

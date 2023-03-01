@@ -10,7 +10,8 @@ public interface IAppOptionsService : IBlazorCommonService
     /// <summary>This is used when interacting with the <see cref="IStorageService"/> to set and get data.</summary>
     public string StorageKey { get; }
     public IState<AppOptionsState> AppOptionsStateWrap { get; }
-    public string GlobalThemeCssClassString { get; }
+    public string ThemeCssClassString { get; }
+    public string FontSizeCssStyleString { get; }
     
     public void SetActiveThemeRecordKey(ThemeKey themeKey, bool updateStorage = true);
     public void SetTheme(ThemeRecord theme, bool updateStorage = true);

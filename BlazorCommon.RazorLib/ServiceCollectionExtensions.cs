@@ -6,6 +6,7 @@ using BlazorCommon.RazorLib.Options;
 using BlazorCommon.RazorLib.Storage;
 using BlazorCommon.RazorLib.Theme;
 using BlazorCommon.RazorLib.TreeView;
+using Fluxor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorCommon.RazorLib;
@@ -23,6 +24,13 @@ public static class ServiceCollectionExtensions
         var blazorCommonOptions = new BlazorCommonOptions();
 
         configure?.Invoke(blazorCommonOptions);
+
+        if (blazorCommonOptions.InitializeFluxor)
+        {
+            services.AddFluxor(options => 
+                options.ScanAssemblies(
+                    typeof(ServiceCollectionExtensions).Assembly));
+        }
         
         return services
             .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
@@ -42,5 +50,23 @@ public static class ServiceCollectionExtensions
                 blazorCommonOptions.BlazorCommonFactories.ThemeServiceFactory.Invoke(serviceProvider))
             .AddScoped<ITreeViewService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.TreeViewServiceFactory.Invoke(serviceProvider));
+    }
+    
+    public static IServiceCollection RegisterExtensionInitializer(
+        this IServiceCollection services,
+        IServiceProvider serviceProvider,
+        ExtensionInitializer extensionInitializer)
+    {
+        var extensionInitializers = serviceProvider.GetService<ExtensionInitializersCollection>();
+
+        if (extensionInitializers is null)
+        {
+            extensionInitializers = new ExtensionInitializersCollection();
+            services.AddSingleton<ExtensionInitializersCollection>();
+        }
+        
+        extensionInitializers.Add(extensionInitializer);
+
+        return services;
     }
 }
