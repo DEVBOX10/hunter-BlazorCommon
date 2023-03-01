@@ -1,0 +1,5 @@
+﻿:root {
+    /* Sizes */
+    --bcrl_tree-view-display-focus-outline-size: 10px;
+    --bcrl_tree-view-display-focus-outline-offset: -5px;
+}

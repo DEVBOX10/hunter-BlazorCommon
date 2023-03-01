@@ -1,0 +1,51 @@
+﻿:root {
+    /* Colors */
+
+    --bcrl_notification-display-background-color: #2d2f34;
+    --bcrl_notification-display-toolbar-background-color: #071c57;
+}
+
+:root {
+    /* Sizes */
+
+    --bcrl_notification-display-z-index: 15;
+    --bcrl_notification-display-box-shadow-blur-radius: 2px;
+    --bcrl_notification-display-toolbar-height: 2rem;
+}
+
+.bcrl_notification {
+    position: fixed;
+    z-index: var(--bcrl_notification-display-z-index);
+    color: var(--bcrl_secondary-foreground-color);
+    background-color: var(--bcrl_notification-display-background-color);
+    box-shadow: 0 0 var(--bcrl_notification-display-box-shadow-blur-radius) var(--bcrl_primary-box-shadow-color);
+}
+
+.bcrl_notification-toolbar {
+    height: var(--bcrl_notification-display-toolbar-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--bcrl_tertiary-foreground-color);
+    background-color: var(--bcrl_notification-display-toolbar-background-color);
+}
+
+.bcrl_notification-control-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.bcrl_notification-body {
+    height: calc(100% - var(--bcrl_notification-display-toolbar-height));
+    overflow: auto;
+}
+
+:root {
+    /* Sizes */
+    --bcrl_notification-display-z-index: 15;
+    --bcrl_notification-display-box-shadow-blur-radius: 2px;
+    --bcrl_notification-display-toolbar-height: 2rem;
+}
+
+
+

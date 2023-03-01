@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Fluxor.Blazor.Web" Version="5.7.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\background.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
+      <_ContentIncludedByDefault Remove="DialogNotification\Dialog\DialogDisplay.razor" />
+      <_ContentIncludedByDefault Remove="DialogNotification\Notification\CommonErrorNotificationDisplay.razor" />
+      <_ContentIncludedByDefault Remove="DialogNotification\Notification\CommonInformativeNotificationDisplay.razor" />
+      <_ContentIncludedByDefault Remove="DialogNotification\Notification\NotificationDisplay.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Dialog\DialogDisplay.razor" />
+      <AdditionalFiles Include="Notification\CommonErrorNotificationDisplay.razor" />
+      <AdditionalFiles Include="Notification\CommonInformativeNotificationDisplay.razor" />
+      <AdditionalFiles Include="Notification\NotificationDisplay.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\blazorTreeView.css" />
+    </ItemGroup>
+
+</Project>

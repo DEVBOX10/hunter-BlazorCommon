@@ -1,0 +1,31 @@
+﻿.bcrl_resize-handle-north {
+    cursor: n-resize;
+}
+
+.bcrl_resize-handle-east {
+    cursor: e-resize;
+}
+
+.bcrl_resize-handle-south {
+    cursor: s-resize;
+}
+
+.bcrl_resize-handle-west {
+    cursor: w-resize;
+}
+
+.bcrl_resize-handle-north-east {
+    cursor: ne-resize;
+}
+
+.bcrl_resize-handle-south-east {
+    cursor: se-resize;
+}
+
+.bcrl_resize-handle-south-west {
+    cursor: sw-resize;
+}
+
+.bcrl_resize-handle-north-west {
+    cursor: nw-resize;
+}

@@ -1,0 +1,14 @@
+﻿@{
+    var appOptionsState = AppOptionsService.AppOptionsStateWrap.Value;
+}
+
+<div class="bcrl_input-app-options-font-size">
+    
+    <input type="number" 
+           @bind="FontSizeInPixels"/>
+    
+    <br/>
+    
+    font-size:&nbsp;<!--
+    -->@(appOptionsState.Options.FontSizeInPixels)px
+</div>
