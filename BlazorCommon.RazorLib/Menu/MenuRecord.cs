@@ -11,4 +11,4 @@ public record MenuRecord(ImmutableArray<MenuOptionRecord> MenuOptions)
                 "No menu options exist for this item.",
                 MenuOptionKind.Other)
         }.ToImmutableArray());
-}
+}// test if locked branch is still available to myself
