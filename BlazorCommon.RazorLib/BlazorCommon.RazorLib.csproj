@@ -12,10 +12,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Fluxor.Blazor.Web" Version="5.7.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
+        <PackageReference Condition="'$(TargetFramework)' == 'net7.0'" Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+        <PackageReference Condition="'$(TargetFramework)' == 'net6.0'" Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+        <PackageReference Condition="'$(TargetFramework)' == 'net5.0'" Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
+        <PackageReference Condition="'$(TargetFramework)' != 'net7.0' AND '$(TargetFramework)' != 'net6.0' AND '$(TargetFramework)' != 'net5.0'" Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
     </ItemGroup>
-
+    
+    <ItemGroup>
+        <PackageReference Include="Fluxor.Blazor.Web" Version="5.7.0" />        
+    </ItemGroup>
+    
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\background.png" />
       <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
@@ -23,9 +29,21 @@
       <_ContentIncludedByDefault Remove="DialogNotification\Notification\CommonErrorNotificationDisplay.razor" />
       <_ContentIncludedByDefault Remove="DialogNotification\Notification\CommonInformativeNotificationDisplay.razor" />
       <_ContentIncludedByDefault Remove="DialogNotification\Notification\NotificationDisplay.razor" />
+      <_ContentIncludedByDefault Remove="WatchWindow\NavLinks\BalcTreeViewNavLinks.razor" />
     </ItemGroup>
 
     <ItemGroup>
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\LabeledCounter.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugContextMenuDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewEnumerableDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewExceptionDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewFieldsDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewInterfaceImplementationDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewPropertiesDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewReflectionDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewTextDisplay.razor" />
+      <AdditionalFiles Include="WatchWindow\WatchWindowPage.razor" />
       <AdditionalFiles Include="Dialog\DialogDisplay.razor" />
       <AdditionalFiles Include="Notification\CommonErrorNotificationDisplay.razor" />
       <AdditionalFiles Include="Notification\CommonInformativeNotificationDisplay.razor" />
