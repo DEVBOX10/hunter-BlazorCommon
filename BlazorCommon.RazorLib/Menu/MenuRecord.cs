@@ -11,4 +11,4 @@ public record MenuRecord(ImmutableArray<MenuOptionRecord> MenuOptions)
                 "No menu options exist for this item.",
                 MenuOptionKind.Other)
         }.ToImmutableArray());
-}
+}//test that branch rules don't allow this commit to be pushed to main
