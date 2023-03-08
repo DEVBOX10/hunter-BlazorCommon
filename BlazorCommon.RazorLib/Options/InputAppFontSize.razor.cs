@@ -7,11 +7,16 @@ public partial class InputAppFontSize : ComponentBase, IDisposable
 {
     [Inject]
     private IAppOptionsService AppOptionsService { get; set; } = null!;
+
+    [Parameter]
+    public string CssClassString { get; set; } = string.Empty;
+    [Parameter]
+    public string CssStyleString { get; set; } = string.Empty;
     
     public int FontSizeInPixels
     {
         get => AppOptionsService.AppOptionsStateWrap.Value.Options.FontSizeInPixels ??
-               AppOptionsState.MINIMUM_FONT_SIZE_IN_PIXELS;
+               AppOptionsState.DEFAULT_FONT_SIZE_IN_PIXELS;
         set
         {
             if (value < AppOptionsState.MINIMUM_FONT_SIZE_IN_PIXELS)
@@ -28,9 +33,9 @@ public partial class InputAppFontSize : ComponentBase, IDisposable
         base.OnInitialized();
     }
 
-    private void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
+    private async void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
     {
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()

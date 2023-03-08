@@ -1,10 +1,4 @@
-﻿:root {
-    /* Sizes */
-    --bcrl_dropdown-display-z-index: 20;
-    --bcrl_dropdown-display-default-background-box-shadow-blur-radius: 2px;
-}
-
-.bcrl_dropdown-display {
+﻿.bcrl_dropdown-display {
     z-index: var(--bcrl_dropdown-display-z-index);
     position: absolute;
     color: var(--bcrl_tertiary-foreground-color);

@@ -11,21 +11,25 @@ public partial class BlazorCommonInitializer : ComponentBase
     [Inject]
     private IAppOptionsService AppOptionsService { get; set; } = null!;
     [Inject]
-    private IThemeRecordsCollectionService ThemeRecordsCollectionService { get; set; } = null!;
-    [Inject]
-    private IThemeServiceOptions ThemeServiceOptions { get; set; } = null!;
+    private ExtensionInitializersCollection ExtensionInitializersCollection { get; set; } = null!;
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             AppOptionsService.SetActiveThemeRecordKey(
-                ThemeServiceOptions.InitialThemeKey,
+                BlazorCommonOptions.InitialThemeKey,
                 false);
 
-            AppOptionsService.SetFromLocalStorageAsync();
+            await AppOptionsService.SetFromLocalStorageAsync();
+
+            foreach (var extensionInitializer in ExtensionInitializersCollection)
+            {
+                await extensionInitializer.InitializeAsync
+                    .Invoke();
+            }
         }
         
-        base.OnAfterRender(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
     }
 }

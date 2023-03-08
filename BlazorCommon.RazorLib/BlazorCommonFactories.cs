@@ -26,6 +26,7 @@ public record BlazorCommonFactories
     
     public Func<IServiceProvider, IClipboardService> ClipboardServiceFactory { get; init; } =
         serviceProvider => new JavaScriptInteropClipboardService(
+            true,
             serviceProvider.GetRequiredService<IJSRuntime>());
     
     public Func<IServiceProvider, IDialogService> DialogServiceFactory { get; init; } =

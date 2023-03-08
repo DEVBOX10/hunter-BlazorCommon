@@ -1,4 +1,6 @@
-﻿namespace BlazorCommon.RazorLib;
+﻿using BlazorCommon.RazorLib.Theme;
+
+namespace BlazorCommon.RazorLib;
 
 public record BlazorCommonOptions
 {
@@ -13,6 +15,10 @@ public record BlazorCommonOptions
     /// service collection extension method
     /// </summary>
     public bool InitializeFluxor { get; init; } = true;
-
+    /// <summary>
+    /// The <see cref="ThemeKey"/> to be used when the application starts
+    /// </summary>
+    public ThemeKey InitialThemeKey { get; } = ThemeFacts.VisualStudioDarkThemeClone.ThemeKey;
+    
     public BlazorCommonFactories BlazorCommonFactories { get; init; } = new();
 }

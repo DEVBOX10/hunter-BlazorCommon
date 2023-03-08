@@ -9,12 +9,14 @@ public partial class InputAppIconSize : ComponentBase, IDisposable
     private IAppOptionsService AppOptionsService { get; set; } = null!;
 
     [Parameter]
-    public string InputElementCssClass { get; set; } = string.Empty;
+    public string CssClassString { get; set; } = string.Empty;
+    [Parameter]
+    public string CssStyleString { get; set; } = string.Empty;
     
     private int IconSizeInPixels
     {
         get => AppOptionsService.AppOptionsStateWrap.Value.Options.IconSizeInPixels ??
-               AppOptionsState.MINIMUM_ICON_SIZE_IN_PIXELS;
+               AppOptionsState.DEFAULT_ICON_SIZE_IN_PIXELS;
         set
         {
             if (value < AppOptionsState.MINIMUM_ICON_SIZE_IN_PIXELS)
@@ -31,9 +33,9 @@ public partial class InputAppIconSize : ComponentBase, IDisposable
         return base.OnInitializedAsync();
     }
 
-    private void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
+    private async void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
     {
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
     
     public void Dispose()

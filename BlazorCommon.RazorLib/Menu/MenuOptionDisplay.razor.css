@@ -1,10 +1,4 @@
-﻿:root {
-    /* Sizes */
-    --bcrl_menu-option-display-padding-width: 10px;
-    --bcrl_menu-option-display-focus-outline-size: 2px;
-}
-
-.bcrl_menu-option-widget {
+﻿.bcrl_menu-option-widget {
     padding-bottom: 10px;
 }
 

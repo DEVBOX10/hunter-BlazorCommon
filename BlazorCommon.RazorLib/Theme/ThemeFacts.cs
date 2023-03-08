@@ -1,4 +1,6 @@
-﻿namespace BlazorCommon.RazorLib.Theme;
+﻿using System.Collections.Immutable;
+
+namespace BlazorCommon.RazorLib.Theme;
 
 public static class ThemeFacts
 {
@@ -7,12 +9,14 @@ public static class ThemeFacts
         "Visual Studio Light Clone",
         "bcrl_visual-studio-light-theme-clone",
         ThemeContrastKind.Default,
-        ThemeColorKind.Light);
+        ThemeColorKind.Light,
+        new [] { ThemeScope.App, ThemeScope.TextEditor }.ToImmutableList());
     
     public static readonly ThemeRecord VisualStudioDarkThemeClone = new ThemeRecord(
         new ThemeKey(Guid.Parse("8eaabd97-186d-40d0-a57b-5fec1c158902")),
         "Visual Studio Dark Clone",
         "bcrl_visual-studio-dark-theme-clone",
         ThemeContrastKind.Default,
-        ThemeColorKind.Dark);
+        ThemeColorKind.Dark,
+        new [] { ThemeScope.App, ThemeScope.TextEditor }.ToImmutableList());
 }

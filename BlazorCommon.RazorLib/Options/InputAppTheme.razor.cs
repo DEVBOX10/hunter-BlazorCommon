@@ -12,18 +12,16 @@ public partial class InputAppTheme : IDisposable
     private IAppOptionsService AppOptionsService { get; set; } = null!;
 
     [Parameter]
-    public string InputElementCssClass { get; set; } = string.Empty;
+    public string CssClassString { get; set; } = string.Empty;
+    [Parameter]
+    public string CssStyleString { get; set; } = string.Empty;
     
     protected override void OnInitialized()
     {
+        AppOptionsService.AppOptionsStateWrap.StateChanged += AppOptionsStateWrapOnStateChanged;
         ThemeRecordsCollectionService.ThemeRecordsCollectionWrap.StateChanged += ThemeStateWrapOnStateChanged;
         
         base.OnInitialized();
-    }
-
-    private void ThemeStateWrapOnStateChanged(object? sender, EventArgs e)
-    {
-        InvokeAsync(StateHasChanged);
     }
     
     private void OnThemeSelectChanged(ChangeEventArgs changeEventArgs)
@@ -37,7 +35,12 @@ public partial class InputAppTheme : IDisposable
 
         if (Guid.TryParse(guidAsString, out var guidValue))
         {
-            var existingThemeRecord = themeState.ThemeRecordsList
+            var themesInScope = themeState.ThemeRecordsList
+                .Where(x => 
+                    x.ThemeScopes.Contains(ThemeScope.App))
+                .ToArray();
+            
+            var existingThemeRecord = themesInScope
                 .FirstOrDefault(btr => btr.ThemeKey.Guid == guidValue);
 
             if (existingThemeRecord is not null)
@@ -46,10 +49,10 @@ public partial class InputAppTheme : IDisposable
     }
  
     private bool CheckIsActiveValid(
-        ImmutableList<ThemeRecord> themeRecordsList, 
+        ThemeRecord[] themeRecords, 
         ThemeKey activeThemeKey)
     {
-        return themeRecordsList.Any(
+        return themeRecords.Any(
             btr => 
                 btr.ThemeKey == activeThemeKey);
     }
@@ -61,8 +64,19 @@ public partial class InputAppTheme : IDisposable
         return themeKey == activeThemeKey;
     }
     
+    private async void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    private async void ThemeStateWrapOnStateChanged(object? sender, EventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+    
     public void Dispose()
     {
+        AppOptionsService.AppOptionsStateWrap.StateChanged -= AppOptionsStateWrapOnStateChanged;
         ThemeRecordsCollectionService.ThemeRecordsCollectionWrap.StateChanged -= ThemeStateWrapOnStateChanged;
     }
 }

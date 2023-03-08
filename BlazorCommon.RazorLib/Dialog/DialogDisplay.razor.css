@@ -1,18 +1,4 @@
-﻿:root {
-    --bcrl_dialog-display-toolbar-height: 2rem;
-    --bcrl_dialog-display-z-index: 10;
-    --bcrl_dialog-display-box-shadow-blur-radius: 2px;
-    --bcrl_dialog-display-button-entry-margin-right: 5px;
-    --bcrl_dialog-display-button-entry-padding: 3px;
-}
-
-:root {
-    --bcrl_dialog-display-background-color: #2d2f34;
-    --bcrl_dialog-toolbar-foreground-color: var(--bcrl_primary-foreground-color);
-    --bcrl_dialog-toolbar-background-color: #071c57;
-}
-
-.bcrl_dialog-display {
+﻿.bcrl_dialog-display {
     z-index: var(--bcrl_dialog-display-z-index);
     color: var(--bcrl_secondary-foreground-color);
     background-color: var(--bcrl_secondary-background-color);
@@ -43,13 +29,4 @@
 .bcrl_dialog-display-body {
     height: calc(100% - var(--bcrl_dialog-display-toolbar-height));
     overflow: auto;
-}
-
-:root {
-    /* Sizes */
-    --bcrl_dialog-display-toolbar-height: 2rem;
-    --bcrl_dialog-display-z-index: 10;
-    --bcrl_dialog-display-box-shadow-blur-radius: 2px;
-    --bcrl_dialog-display-button-entry-margin-right: 5px;
-    --bcrl_dialog-display-button-entry-padding: 3px;
 }

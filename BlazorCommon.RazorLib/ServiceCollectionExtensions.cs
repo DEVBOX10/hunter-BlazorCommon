@@ -1,4 +1,5 @@
-﻿using BlazorCommon.RazorLib.Dialog;
+﻿using BlazorCommon.RazorLib.Clipboard;
+using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Drag;
 using BlazorCommon.RazorLib.Dropdown;
 using BlazorCommon.RazorLib.Notification;
@@ -6,6 +7,7 @@ using BlazorCommon.RazorLib.Options;
 using BlazorCommon.RazorLib.Storage;
 using BlazorCommon.RazorLib.Theme;
 using BlazorCommon.RazorLib.TreeView;
+using Fluxor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorCommon.RazorLib;
@@ -23,9 +25,19 @@ public static class ServiceCollectionExtensions
         var blazorCommonOptions = new BlazorCommonOptions();
 
         configure?.Invoke(blazorCommonOptions);
+
+        if (blazorCommonOptions.InitializeFluxor)
+        {
+            services.AddFluxor(options => 
+                options.ScanAssemblies(
+                    typeof(ServiceCollectionExtensions).Assembly));
+        }
         
         return services
             .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
+            .AddSingleton<ExtensionInitializersCollection>()
+            .AddScoped<IClipboardService>(serviceProvider => 
+                blazorCommonOptions.BlazorCommonFactories.ClipboardServiceFactory.Invoke(serviceProvider))
             .AddScoped<IDialogService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.DialogServiceFactory.Invoke(serviceProvider))
             .AddScoped<INotificationService>(serviceProvider => 
@@ -42,5 +54,17 @@ public static class ServiceCollectionExtensions
                 blazorCommonOptions.BlazorCommonFactories.ThemeServiceFactory.Invoke(serviceProvider))
             .AddScoped<ITreeViewService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.TreeViewServiceFactory.Invoke(serviceProvider));
+    }
+    
+    public static IServiceCollection RegisterExtensionInitializer(
+        this IServiceCollection services,
+        IServiceProvider serviceProvider,
+        ExtensionInitializer extensionInitializer)
+    {
+        var extensionInitializers = serviceProvider.GetRequiredService<ExtensionInitializersCollection>();
+
+        extensionInitializers.Add(extensionInitializer);
+
+        return services;
     }
 }

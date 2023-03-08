@@ -15,11 +15,13 @@ public partial class AppOptionsState
     public AppOptionsState()
     {
         Options = new CommonOptions(
-            20,
-            18,
+            DEFAULT_FONT_SIZE_IN_PIXELS,
+            DEFAULT_ICON_SIZE_IN_PIXELS,
             ThemeFacts.VisualStudioDarkThemeClone.ThemeKey);
     }
 
+    public const int DEFAULT_FONT_SIZE_IN_PIXELS = 20;
+    public const int DEFAULT_ICON_SIZE_IN_PIXELS = 18;
     public const int MINIMUM_FONT_SIZE_IN_PIXELS = 5;
     public const int MINIMUM_ICON_SIZE_IN_PIXELS = 5;
 

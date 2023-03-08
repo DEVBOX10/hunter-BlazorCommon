@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorCommon.RazorLib.Drag;
 
-public partial class DragDisplay : FluxorComponent
+public partial class DragInitializer : FluxorComponent
 {
     [Inject]
     private IState<DragState> DragStateWrap { get; set; } = null!;
