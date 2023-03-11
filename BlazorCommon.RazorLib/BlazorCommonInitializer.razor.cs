@@ -10,8 +10,6 @@ public partial class BlazorCommonInitializer : ComponentBase
     private BlazorCommonOptions BlazorCommonOptions { get; set; } = null!;
     [Inject]
     private IAppOptionsService AppOptionsService { get; set; } = null!;
-    [Inject]
-    private ExtensionInitializersCollection ExtensionInitializersCollection { get; set; } = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -22,12 +20,6 @@ public partial class BlazorCommonInitializer : ComponentBase
                 false);
 
             await AppOptionsService.SetFromLocalStorageAsync();
-
-            foreach (var extensionInitializer in ExtensionInitializersCollection)
-            {
-                await extensionInitializer.InitializeAsync
-                    .Invoke();
-            }
         }
         
         await base.OnAfterRenderAsync(firstRender);

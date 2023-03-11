@@ -26,16 +26,8 @@ public static class ServiceCollectionExtensions
 
         configure?.Invoke(blazorCommonOptions);
 
-        if (blazorCommonOptions.InitializeFluxor)
-        {
-            services.AddFluxor(options => 
-                options.ScanAssemblies(
-                    typeof(ServiceCollectionExtensions).Assembly));
-        }
-        
-        return services
+        services
             .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
-            .AddSingleton<ExtensionInitializersCollection>()
             .AddScoped<IClipboardService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.ClipboardServiceFactory.Invoke(serviceProvider))
             .AddScoped<IDialogService>(serviceProvider => 
@@ -54,16 +46,13 @@ public static class ServiceCollectionExtensions
                 blazorCommonOptions.BlazorCommonFactories.ThemeServiceFactory.Invoke(serviceProvider))
             .AddScoped<ITreeViewService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.TreeViewServiceFactory.Invoke(serviceProvider));
-    }
-    
-    public static IServiceCollection RegisterExtensionInitializer(
-        this IServiceCollection services,
-        IServiceProvider serviceProvider,
-        ExtensionInitializer extensionInitializer)
-    {
-        var extensionInitializers = serviceProvider.GetRequiredService<ExtensionInitializersCollection>();
-
-        extensionInitializers.Add(extensionInitializer);
+        
+        if (blazorCommonOptions.InitializeFluxor)
+        {
+            services.AddFluxor(options => 
+                options.ScanAssemblies(
+                    typeof(ServiceCollectionExtensions).Assembly));
+        }
 
         return services;
     }
