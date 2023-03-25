@@ -45,7 +45,7 @@ public abstract class TreeViewNoType
     /// directories children and mark itself as expandable as it saw a related
     /// file in its parent.
     /// </summary>
-    public virtual void RemoveRelatedFilesFromParent(List<TreeViewNoType> treeViews)
+    public virtual void RemoveRelatedFilesFromParent(List<TreeViewNoType> siblingsAndSelfTreeViews)
     {
         // The default implementation of this method is to do nothing.
         // Override this method to implement some functionality if desired.

@@ -560,12 +560,10 @@ public partial class TreeViewStateContainer
             {
                 outTreeViewState.ActiveNode.IsExpanded = true;
 
-                _ = Task.Run(async () =>
-                {
-                    await outTreeViewState.ActiveNode
-                        .LoadChildrenAsync();
-                });
-
+                outTreeViewState.ActiveNode
+                    .LoadChildrenAsync()
+                    .Wait();
+                    
                 PerformMarkForRerender(outTreeViewState.ActiveNode);
             }
             
