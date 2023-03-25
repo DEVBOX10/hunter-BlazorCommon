@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorCommon.RazorLib.Keyboard;
@@ -230,6 +231,43 @@ public static class KeyboardKeyFacts
         public const char END_ARROW_BRACKET = '>';
         public const char FORWARD_SLASH = '/';
         public const char BACK_SLASH = '\\';
+        
+        public static readonly ImmutableArray<char> All = new char[]
+        {
+            PunctuationCharacters.OPEN_CURLY_BRACE,
+            PunctuationCharacters.CLOSE_CURLY_BRACE,
+            PunctuationCharacters.OPEN_PARENTHESIS,
+            PunctuationCharacters.CLOSE_PARENTHESIS,
+            PunctuationCharacters.OPEN_SQUARE_BRACKET,
+            PunctuationCharacters.CLOSE_SQUARE_BRACKET,
+            PunctuationCharacters.BANG,
+            PunctuationCharacters.QUESTION_MARK,
+            PunctuationCharacters.PERIOD,
+            PunctuationCharacters.COMMA,
+            PunctuationCharacters.HASHTAG,
+            PunctuationCharacters.DOLLARS,
+            PunctuationCharacters.PERCENT,
+            PunctuationCharacters.AMPERSAND,
+            PunctuationCharacters.CARET,
+            PunctuationCharacters.STAR,
+            PunctuationCharacters.PLUS,
+            PunctuationCharacters.SEMICOLON,
+            PunctuationCharacters.EQUAL,
+            PunctuationCharacters.AT,
+            PunctuationCharacters.DASH,
+            // TODO: Should 'PunctuationCharacters.UNDER_SCORE' count as punctuation? It makes expand selection (double mouse click) on a private field with the leading '_' convention annoying to select the whole word.
+            // PunctuationCharacters.UNDER_SCORE,
+            PunctuationCharacters.ACCENT,
+            PunctuationCharacters.TILDE,
+            PunctuationCharacters.PIPE,
+            PunctuationCharacters.COLON,
+            PunctuationCharacters.DOUBLE_QUOTE,
+            PunctuationCharacters.SINGLE_QUOTE,
+            PunctuationCharacters.OPEN_ARROW_BRACKET,
+            PunctuationCharacters.END_ARROW_BRACKET,
+            PunctuationCharacters.FORWARD_SLASH,
+            PunctuationCharacters.BACK_SLASH,
+        }.ToImmutableArray();
     }
 
     public static class MovementKeys
