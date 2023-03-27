@@ -9,4 +9,5 @@ public record NotificationRecord(
     string Title,
     Type RendererType,
     Dictionary<string, object?>? Parameters,
-    TimeSpan? NotificationOverlayLifespan);
+    TimeSpan? NotificationOverlayLifespan,
+    string? CssClassString);
