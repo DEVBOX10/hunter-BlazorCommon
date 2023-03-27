@@ -29,14 +29,19 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
     {
         if (firstRender)
         {
-            _ = Task.Run(async () =>
+            var notificationRecord = NotificationRecord;
+            
+            if (notificationRecord.NotificationOverlayLifespan is not null)
             {
-                await Task.Delay(
-                    NotificationRecord.NotificationOverlayLifespan,
-                    _notificationOverlayCancellationTokenSource.Token);
+                _ = Task.Run(async () =>
+                {
+                    await Task.Delay(
+                        notificationRecord.NotificationOverlayLifespan.Value,
+                        _notificationOverlayCancellationTokenSource.Token);
                 
-                DisposeNotification();
-            });
+                    DisposeNotification();
+                });
+            }
         }
         
         return base.OnAfterRenderAsync(firstRender);
