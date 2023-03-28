@@ -15,6 +15,12 @@
     cursor: default;
 }
 
+.bcrl_dialog-display-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .bcrl_error .bcrl_dialog-display-toolbar {
     background-color: var(--bcrl_error-background-color);
 }

@@ -12,7 +12,9 @@
 
     <div class="bcrl_dialog-display-toolbar"
          @onmousedown="SubscribeMoveHandle">
-        <div class="bcrl_dialog-display-title bcrl_unselectable">
+        <div class="bcrl_dialog-display-title bcrl_unselectable"
+             style="@DialogTitleCssStyleString"
+             title="@DialogRecord.Title">
             @DialogRecord.Title
         </div>
 
