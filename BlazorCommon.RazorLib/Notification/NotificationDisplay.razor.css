@@ -14,6 +14,7 @@
     color: var(--bcrl_tertiary-foreground-color);
     background-color: var(--bcrl_notification-display-toolbar-background-color);
     cursor: default;
+    padding: var(--bcrl_notification-toolbar-padding);
 }
 
 .bcrl_notification-title {
@@ -31,7 +32,15 @@
     align-items: center;
 }
 
+.bcrl_notification-button-entry {
+    margin-right: var(--bcrl_notification-button-entry-margin-right);
+    padding: var(--bcrl_notification-button-entry-padding);
+    display: inline-flex;
+    height: fit-content;
+}
+
 .bcrl_notification-body {
     height: calc(100% - var(--bcrl_notification-display-toolbar-height));
     overflow: auto;
+    padding: var(--bcrl_notification-body-padding);
 }

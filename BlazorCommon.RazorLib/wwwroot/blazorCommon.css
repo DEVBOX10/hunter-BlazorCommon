@@ -253,6 +253,8 @@ ul.bcrl_indent-child-content {
     --bcrl_dialog-display-box-shadow-blur-radius: 2px;
     --bcrl_dialog-display-button-entry-margin-right: 5px;
     --bcrl_dialog-display-button-entry-padding: 3px;
+    --bcrl_dialog-display-toolbar-padding: 0 7px;
+    --bcrl_dialog-display-body-padding: 0 7px;
     --bcrl_dropdown-display-z-index: 20;
     --bcrl_dropdown-display-default-background-box-shadow-blur-radius: 2px;
     --bcrl_drag-initializer-z-index: 30;
@@ -262,6 +264,10 @@ ul.bcrl_indent-child-content {
     --bcrl_notification-display-z-index: 15;
     --bcrl_notification-display-box-shadow-blur-radius: 2px;
     --bcrl_notification-display-toolbar-height: 2rem;
+    --bcrl_notification-button-entry-margin-right: 5px;
+    --bcrl_notification-button-entry-padding: 3px;
+    --bcrl_notification-toolbar-padding: 0 3px;
+    --bcrl_notification-body-padding: 0 3px;
 }
 
 /* Theme CSS */
