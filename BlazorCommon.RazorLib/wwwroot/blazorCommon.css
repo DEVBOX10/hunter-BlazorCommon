@@ -305,7 +305,7 @@ ul.bcrl_indent-child-content {
     --bcrl_primary-disabled-hover-foreground-color: #e6e6e6;
     --bcrl_notification-display-background-color: #2d2f34;
     --bcrl_notification-display-toolbar-background-color: #071c57;
-    --bcrl_notification-display-toolbar-background-color-error: #5a0404;
+    --bcrl_error-background-color: #5a0404;
     --bcrl_active-button-background-color: #753282;
     --bcrl_active-button-primary-font-color: var(--bcrl_primary-font-color);
     --bcrl_hr-primary-background-color: currentColor;
@@ -382,7 +382,7 @@ ul.bcrl_indent-child-content {
     --bcrl_primary-disabled-hover-foreground-color: var(--bcrl_primary-disabled-background-color);
     --bcrl_notification-display-background-color: rgb(252, 252, 245);
     --bcrl_notification-display-toolbar-background-color: rgb(192, 214, 247);
-    --bcrl_notification-display-toolbar-background-color-error: rgb(253, 172, 183);
+    --bcrl_error-background-color: rgb(253, 172, 183);
     --bcrl_active-button-background-color: #d889e8;
     --bcrl_active-button-primary-font-color: var(--bcrl_primary-font-color);
     --bcrl_hr-primary-background-color: currentColor;

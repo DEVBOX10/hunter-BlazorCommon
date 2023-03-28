@@ -6,7 +6,8 @@ public record DialogRecord(
     DialogKey DialogKey,
     string Title,
     Type RendererType,
-    Dictionary<string, object?>? Parameters)
+    Dictionary<string, object?>? Parameters,
+    string? CssClassString)
 {
     public ElementDimensions ElementDimensions { get; init; } = ConstructDefaultDialogDimensions();
     public bool IsMinimized { get; set; }

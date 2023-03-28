@@ -12,6 +12,11 @@
     align-items: center;
     color: var(--bcrl_dialog-toolbar-foreground-color);
     background-color: var(--bcrl_dialog-toolbar-background-color);
+    cursor: default;
+}
+
+.bcrl_error .bcrl_dialog-display-toolbar {
+    background-color: var(--bcrl_error-background-color);
 }
 
 .bcrl_dialog-display-buttons {

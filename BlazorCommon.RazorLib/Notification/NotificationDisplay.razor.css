@@ -13,10 +13,17 @@
     align-items: center;
     color: var(--bcrl_tertiary-foreground-color);
     background-color: var(--bcrl_notification-display-toolbar-background-color);
+    cursor: default;
 }
 
-.bcrl_notification-error .bcrl_notification-toolbar {
-    background-color: var(--bcrl_notification-display-toolbar-background-color-error);
+.bcrl_notification-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bcrl_error .bcrl_notification-toolbar {
+    background-color: var(--bcrl_error-background-color);
 }
 
 .bcrl_notification-control-buttons {

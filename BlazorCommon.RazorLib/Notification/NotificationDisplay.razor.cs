@@ -1,5 +1,10 @@
 ﻿using System.Text;
+using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Dimensions;
+using BlazorCommon.RazorLib.Html;
+using BlazorCommon.RazorLib.Options;
+using BlazorCommon.RazorLib.Store.ApplicationOptions;
+using BlazorCommon.RazorLib.Store.DialogCase;
 using BlazorCommon.RazorLib.Store.NotificationCase;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
@@ -8,6 +13,8 @@ namespace BlazorCommon.RazorLib.Notification;
 
 public partial class NotificationDisplay : ComponentBase, IDisposable
 {
+    [Inject]
+    private IState<AppOptionsState> AppOptionsStateWrap { get; set; } = null!;
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
     
@@ -20,10 +27,33 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
     private const int HEIGHT_IN_PIXELS = 125;
     private const int RIGHT_OFFSET_IN_PIXELS = 15;
     private const int BOTTOM_OFFSET_IN_PIXELS = 15;
+
+    private const int COUNT_OF_CONTROL_BUTTONS = 2;
     
     private readonly CancellationTokenSource _notificationOverlayCancellationTokenSource = new();
+    private readonly DialogKey _dialogKey = DialogKey.NewDialogKey();
 
     private string CssStyleString => GetCssStyleString();
+    
+    private string IconSizeInPixelsCssValue =>
+        $"{AppOptionsStateWrap.Value.Options.IconSizeInPixels!.Value.ToCssValue()}";
+    
+    private string NotificationTitleCssStyleString =>
+        "width: calc(100% -" +
+        $" ({COUNT_OF_CONTROL_BUTTONS} * ({IconSizeInPixelsCssValue}px)) -" +
+        $" ({COUNT_OF_CONTROL_BUTTONS} * ({HtmlFacts.Button.ButtonPaddingHorizontalTotalInPixelsCssValue})));";
+    
+    protected override void OnInitialized()
+    {
+        AppOptionsStateWrap.StateChanged += AppOptionsStateWrapOnStateChanged;
+        
+        base.OnInitialized();
+    }
+
+    private async void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -87,8 +117,29 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
                 NotificationRecord.NotificationKey));
     }
     
+    private void ChangeNotificationToDialog()
+    {
+        var dialogRecord = new DialogRecord(
+            _dialogKey,
+            NotificationRecord.Title,
+            NotificationRecord.RendererType,
+            NotificationRecord.Parameters,
+            NotificationRecord.CssClassString)
+        {
+            IsResizable = true
+        };
+        
+        Dispatcher.Dispatch(
+            new DialogRecordsCollection.RegisterAction(
+                dialogRecord));
+
+        DisposeNotification();
+    }
+    
     public void Dispose()
     {
         _notificationOverlayCancellationTokenSource.Cancel();
+        
+        AppOptionsStateWrap.StateChanged -= AppOptionsStateWrapOnStateChanged;
     }
 }

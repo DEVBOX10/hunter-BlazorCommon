@@ -1,6 +1,6 @@
 @using BlazorCommon.RazorLib.Resize
 
-<div class="bcrl_dialog-display"
+<div class="bcrl_dialog-display @(DialogRecord.CssClassString ?? string.Empty)"
      style="@ElementDimensionsStyleCssString @IsMaximizedStyleCssString">
 
     @if (DialogRecord.IsResizable && !DialogRecord.IsMaximized)
@@ -12,7 +12,7 @@
 
     <div class="bcrl_dialog-display-toolbar"
          @onmousedown="SubscribeMoveHandle">
-        <div class="bcrl_dialog-display-title">
+        <div class="bcrl_dialog-display-title bcrl_unselectable">
             @DialogRecord.Title
         </div>
 
