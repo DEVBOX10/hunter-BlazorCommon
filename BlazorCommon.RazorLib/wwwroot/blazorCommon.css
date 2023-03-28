@@ -253,6 +253,8 @@ ul.bcrl_indent-child-content {
     --bcrl_dialog-display-box-shadow-blur-radius: 2px;
     --bcrl_dialog-display-button-entry-margin-right: 5px;
     --bcrl_dialog-display-button-entry-padding: 3px;
+    --bcrl_dialog-display-toolbar-padding: 0 7px;
+    --bcrl_dialog-display-body-padding: 0 7px;
     --bcrl_dropdown-display-z-index: 20;
     --bcrl_dropdown-display-default-background-box-shadow-blur-radius: 2px;
     --bcrl_drag-initializer-z-index: 30;
@@ -262,6 +264,10 @@ ul.bcrl_indent-child-content {
     --bcrl_notification-display-z-index: 15;
     --bcrl_notification-display-box-shadow-blur-radius: 2px;
     --bcrl_notification-display-toolbar-height: 2rem;
+    --bcrl_notification-button-entry-margin-right: 5px;
+    --bcrl_notification-button-entry-padding: 3px;
+    --bcrl_notification-toolbar-padding: 0 3px;
+    --bcrl_notification-body-padding: 0 3px;
 }
 
 /* Theme CSS */
@@ -305,7 +311,7 @@ ul.bcrl_indent-child-content {
     --bcrl_primary-disabled-hover-foreground-color: #e6e6e6;
     --bcrl_notification-display-background-color: #2d2f34;
     --bcrl_notification-display-toolbar-background-color: #071c57;
-    --bcrl_notification-display-toolbar-background-color-error: #5a0404;
+    --bcrl_error-background-color: #5a0404;
     --bcrl_active-button-background-color: #753282;
     --bcrl_active-button-primary-font-color: var(--bcrl_primary-font-color);
     --bcrl_hr-primary-background-color: currentColor;
@@ -382,7 +388,7 @@ ul.bcrl_indent-child-content {
     --bcrl_primary-disabled-hover-foreground-color: var(--bcrl_primary-disabled-background-color);
     --bcrl_notification-display-background-color: rgb(252, 252, 245);
     --bcrl_notification-display-toolbar-background-color: rgb(192, 214, 247);
-    --bcrl_notification-display-toolbar-background-color-error: rgb(253, 172, 183);
+    --bcrl_error-background-color: rgb(253, 172, 183);
     --bcrl_active-button-background-color: #d889e8;
     --bcrl_active-button-primary-font-color: var(--bcrl_primary-font-color);
     --bcrl_hr-primary-background-color: currentColor;

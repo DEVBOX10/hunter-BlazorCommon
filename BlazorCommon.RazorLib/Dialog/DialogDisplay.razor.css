@@ -12,6 +12,18 @@
     align-items: center;
     color: var(--bcrl_dialog-toolbar-foreground-color);
     background-color: var(--bcrl_dialog-toolbar-background-color);
+    cursor: default;
+    padding: var(--bcrl_dialog-display-toolbar-padding);
+}
+
+.bcrl_dialog-display-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bcrl_error .bcrl_dialog-display-toolbar {
+    background-color: var(--bcrl_error-background-color);
 }
 
 .bcrl_dialog-display-buttons {
@@ -20,13 +32,17 @@
 }
 
 .bcrl_dialog-display-button-entry {
-    margin-right: var(--bcrl_dialog-display-button-entry-margin-right);
     padding: var(--bcrl_dialog-display-button-entry-padding);
     display: inline-flex;
     height: fit-content;
 }
 
+.bcrl_dialog-display-button-entry:not(:last-of-type) {
+    margin-right: var(--bcrl_dialog-display-button-entry-margin-right);
+}
+
 .bcrl_dialog-display-body {
     height: calc(100% - var(--bcrl_dialog-display-toolbar-height));
     overflow: auto;
+    padding: var(--bcrl_dialog-display-body-padding);
 }

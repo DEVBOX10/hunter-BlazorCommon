@@ -1,22 +1,50 @@
+using BlazorCommon.RazorLib.Dimensions;
+using BlazorCommon.RazorLib.Html;
 using BlazorCommon.RazorLib.Resize;
+using BlazorCommon.RazorLib.Store.ApplicationOptions;
+using Fluxor;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorCommon.RazorLib.Dialog;
 
-public partial class DialogDisplay
+public partial class DialogDisplay : IDisposable
 {
     [Inject]
     private IDialogService DialogService { get; set; } = null!;
+    [Inject]
+    private IState<AppOptionsState> AppOptionsStateWrap { get; set; } = null!;
 
     [Parameter]
     public DialogRecord DialogRecord { get; set; } = null!;
 
-    private ResizableDisplay? _resizableDisplay;
+    private const int COUNT_OF_CONTROL_BUTTONS = 2;
 
+    private ResizableDisplay? _resizableDisplay;
+    
     private string ElementDimensionsStyleCssString => DialogRecord.ElementDimensions.StyleString;
     private string IsMaximizedStyleCssString => DialogRecord.IsMaximized
         ? "width: 100vw; height: 100vh; left: 0; top: 0;"
         : string.Empty;
+    
+    private string IconSizeInPixelsCssValue =>
+        $"{AppOptionsStateWrap.Value.Options.IconSizeInPixels!.Value.ToCssValue()}";
+    
+    private string DialogTitleCssStyleString =>
+        "width: calc(100% -" +
+        $" ({COUNT_OF_CONTROL_BUTTONS} * ({IconSizeInPixelsCssValue}px)) -" +
+        $" ({COUNT_OF_CONTROL_BUTTONS} * ({HtmlFacts.Button.ButtonPaddingHorizontalTotalInPixelsCssValue})));";
+
+    protected override void OnInitialized()
+    {
+        AppOptionsStateWrap.StateChanged += AppOptionsStateWrapOnStateChanged;
+        
+        base.OnInitialized();
+    }
+
+    private async void AppOptionsStateWrapOnStateChanged(object? sender, EventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
     
     private async Task ReRenderAsync()
     {
@@ -39,5 +67,10 @@ public partial class DialogDisplay
     {
         DialogService.DisposeDialogRecord(
             DialogRecord.DialogKey);
+    }
+    
+    public void Dispose()
+    {
+        AppOptionsStateWrap.StateChanged -= AppOptionsStateWrapOnStateChanged;
     }
 }
