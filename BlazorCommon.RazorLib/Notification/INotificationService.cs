@@ -7,6 +7,6 @@ public interface INotificationService : IBlazorCommonService
 {
     public IState<NotificationRecordsCollection> NotificationRecordsCollectionWrap { get; }
 
-    public void RegisterNotificationRecord(NotificationRecord dialogRecord);
+    public void RegisterNotificationRecord(NotificationRecord notificationRecord);
     public void DisposeNotificationRecord(NotificationKey dialogKey);
 }
