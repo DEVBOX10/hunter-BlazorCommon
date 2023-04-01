@@ -20,11 +20,11 @@ public class NotificationService : INotificationService
     public bool IsEnabled { get; }
     public IState<NotificationRecordsCollection> NotificationRecordsCollectionWrap { get; }
 
-    public void RegisterNotificationRecord(NotificationRecord dialogRecord)
+    public void RegisterNotificationRecord(NotificationRecord notificationRecord)
     {
         _dispatcher.Dispatch(
             new NotificationRecordsCollection.RegisterAction(
-                dialogRecord));
+                notificationRecord));
     }
     
     public void DisposeNotificationRecord(NotificationKey dialogKey)
