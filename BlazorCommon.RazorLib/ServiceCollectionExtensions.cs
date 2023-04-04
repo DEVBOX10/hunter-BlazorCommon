@@ -24,10 +24,11 @@ public static class ServiceCollectionExtensions
     {
         var blazorCommonOptions = new BlazorCommonOptions();
 
-        configure?.Invoke(blazorCommonOptions);
-
+        if (configure is not null)
+            blazorCommonOptions = configure.Invoke(blazorCommonOptions);
+        
         services
-            .AddSingleton<BlazorCommonOptions>(blazorCommonOptions)
+            .AddSingleton(blazorCommonOptions)
             .AddScoped<IClipboardService>(serviceProvider => 
                 blazorCommonOptions.BlazorCommonFactories.ClipboardServiceFactory.Invoke(serviceProvider))
             .AddScoped<IDialogService>(serviceProvider => 
