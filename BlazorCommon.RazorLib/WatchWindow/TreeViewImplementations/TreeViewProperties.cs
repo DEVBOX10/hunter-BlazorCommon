@@ -5,19 +5,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
 public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewProperties(
         TextEditorDebugObjectWrap textEditorDebugObjectWrap,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             textEditorDebugObjectWrap,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -39,7 +39,7 @@ public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewPropertiesRenderer,
+            _watchWindowTreeViewRenderers.TreeViewPropertiesRenderer,
             new Dictionary<string, object?>
             {
                 {
@@ -90,7 +90,7 @@ public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
                         childNode,
                         true,
                         false,
-                        _treeViewRenderers));
+                        _watchWindowTreeViewRenderers));
                 }
                 catch (System.Reflection.TargetParameterCountException)
                 {
@@ -109,7 +109,7 @@ public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
                     "No properties exist for this Type",
                     false,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
         }
         catch (Exception e)
@@ -119,7 +119,7 @@ public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
                 e,
                 false,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
         }
         
         for (int i = 0; i < Children.Count; i++)

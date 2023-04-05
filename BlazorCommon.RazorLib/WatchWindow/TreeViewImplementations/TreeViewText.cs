@@ -4,19 +4,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
 public class TreeViewText : TreeViewWithType<string>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewText(
         string text,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             text,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -38,7 +38,7 @@ public class TreeViewText : TreeViewWithType<string>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewTextRenderer,
+            _watchWindowTreeViewRenderers.TreeViewTextRenderer,
             new Dictionary<string, object?>
             {
                 {

@@ -5,19 +5,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
 public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewEnumerable(
         TextEditorDebugObjectWrap textEditorDebugObjectWrap,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             textEditorDebugObjectWrap,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -39,7 +39,7 @@ public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewEnumerableRenderer,
+            _watchWindowTreeViewRenderers.TreeViewEnumerableRenderer,
             new Dictionary<string, object?>
             {
                 {
@@ -81,7 +81,7 @@ public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
                         childNode,
                         true,
                         false,
-                        _treeViewRenderers));
+                        _watchWindowTreeViewRenderers));
                 }
             }
             else
@@ -97,7 +97,7 @@ public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
                     "Enumeration returned no results.",
                     false,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
         }
         catch (Exception e)
@@ -107,7 +107,7 @@ public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
                 e,
                 false,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
         }
         
         for (int i = 0; i < Children.Count; i++)

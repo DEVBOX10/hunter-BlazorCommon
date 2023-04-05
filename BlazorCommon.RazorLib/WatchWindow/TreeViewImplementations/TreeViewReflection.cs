@@ -5,19 +5,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
 public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewReflection(
         TextEditorDebugObjectWrap textEditorDebugObjectWrap,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             textEditorDebugObjectWrap,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -39,7 +39,7 @@ public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewReflectionRenderer,
+            _watchWindowTreeViewRenderers.TreeViewReflectionRenderer,
             new Dictionary<string, object?>
             {
                 {
@@ -65,20 +65,20 @@ public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
                 Item,
                 true,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
             
             Children.Add(new TreeViewProperties(
                 Item,
                 true,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
             
             if (Item.DebugObjectItem is IEnumerable)
             {
                 Children.Add(new TreeViewEnumerable(Item,
                     true,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
             
             if (Item.DebugObjectItemType.IsInterface &&
@@ -94,7 +94,7 @@ public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
                     interfaceImplementation,
                     true,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
         }
         catch (Exception e)
@@ -104,7 +104,7 @@ public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
                 e,
                 false,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
         }
         
         for (int i = 0; i < Children.Count; i++)
