@@ -11,6 +11,7 @@ public class BackgroundTask : IBackgroundTask
         Func<CancellationToken, Task> workItem,
         string name,
         string description,
+        bool notifyWhenStartingWorkItem,
         Func<CancellationToken, Task> cancelFunc,
         IDispatcher? dispatcher,
         CancellationToken cancellationToken)
@@ -21,17 +22,26 @@ public class BackgroundTask : IBackgroundTask
         CancelFunc = cancelFunc;
         Dispatcher = dispatcher;
         CancellationToken = cancellationToken;
+        ShouldNotifyWhenStartingWorkItem = notifyWhenStartingWorkItem;
     }
 
     public BackgroundTask(
             Func<CancellationToken, Task> workItem,
             string name,
             string description,
+            bool notifyWhenStartingWorkItem,
             Func<CancellationToken, Task> cancelFunc,
             IDispatcher? dispatcher,
             BackgroundTaskKey backgroundTaskKey,
             CancellationToken cancellationToken)
-        : this(workItem, name, description, cancelFunc, dispatcher, cancellationToken)
+        : this(
+            workItem,
+            name,
+            description,
+            notifyWhenStartingWorkItem,
+            cancelFunc,
+            dispatcher,
+            cancellationToken)
     {
         BackgroundTaskKey = backgroundTaskKey;
     }
@@ -39,6 +49,7 @@ public class BackgroundTask : IBackgroundTask
     public BackgroundTaskKey BackgroundTaskKey { get; } = BackgroundTaskKey.NewBackgroundTaskKey();
     public string Name { get; }
     public string Description { get; }
+    public bool ShouldNotifyWhenStartingWorkItem { get; }
     public Task? WorkProgress { get; private set; }
     public Func<CancellationToken, Task> CancelFunc { get; }
     /// <summary>

@@ -24,12 +24,14 @@ public class BackgroundTaskMonitor : IBackgroundTaskMonitor
         ExecutingBackgroundTask = backgroundTask;
         ExecutingBackgroundTaskChanged?.Invoke();
 
-        if (backgroundTask?.Dispatcher is not null &&
+        if (backgroundTask is not null &&
+            backgroundTask.ShouldNotifyWhenStartingWorkItem &&
+            backgroundTask.Dispatcher is not null &&
             _blazorCommonComponentRenderers.BackgroundTaskDisplayRendererType is not null)
         {
             var notificationRecord = new NotificationRecord(
                 NotificationKey.NewNotificationKey(),
-                "ExecutingBackgroundTaskChanged",
+                $"Starting: {backgroundTask.Name}",
                 _blazorCommonComponentRenderers.BackgroundTaskDisplayRendererType,
                 new Dictionary<string, object?>
                 {
