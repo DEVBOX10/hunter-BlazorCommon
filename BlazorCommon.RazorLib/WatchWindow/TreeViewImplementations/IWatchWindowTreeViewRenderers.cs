@@ -1,6 +1,6 @@
 ﻿namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
-public interface ITreeViewRenderers
+public interface IWatchWindowTreeViewRenderers
 {
     public Type TreeViewTextRenderer { get; }
     public Type TreeViewReflectionRenderer { get; }

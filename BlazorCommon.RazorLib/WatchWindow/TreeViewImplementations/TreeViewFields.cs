@@ -13,19 +13,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 /// </summary>
 public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewFields(
         TextEditorDebugObjectWrap textEditorDebugObjectWrap,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             textEditorDebugObjectWrap,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -47,7 +47,7 @@ public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewFieldsRenderer,
+            _watchWindowTreeViewRenderers.TreeViewFieldsRenderer,
             new Dictionary<string, object?>
             {
                 {
@@ -90,7 +90,7 @@ public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
                     childNode,
                     true,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
 
             if (Children.Count == 0)
@@ -99,7 +99,7 @@ public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
                     "No fields exist for this Type",
                     false,
                     false,
-                    _treeViewRenderers));
+                    _watchWindowTreeViewRenderers));
             }
         }
         catch (Exception e)
@@ -109,7 +109,7 @@ public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
                 e,
                 false,
                 false,
-                _treeViewRenderers));
+                _watchWindowTreeViewRenderers));
         }
         
         for (int i = 0; i < Children.Count; i++)

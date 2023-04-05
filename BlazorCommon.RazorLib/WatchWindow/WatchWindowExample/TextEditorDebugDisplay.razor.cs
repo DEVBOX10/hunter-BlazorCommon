@@ -16,7 +16,7 @@ public partial class TextEditorDebugDisplay : FluxorComponent
     [Inject]
     private IDropdownService DropdownService { get; set; } = null!;
     [Inject]
-    private ITreeViewRenderers TreeViewRenderers { get; set; } = null!;
+    private IWatchWindowTreeViewRenderers WatchWindowTreeViewRenderers { get; set; } = null!;
 
     public static TreeViewStateKey TextEditorDebugTreeViewStateKey { get; } = TreeViewStateKey.NewTreeViewStateKey();
     public static DropdownKey WatchWindowContextMenuDropdownKey { get; } = DropdownKey.NewDropdownKey();

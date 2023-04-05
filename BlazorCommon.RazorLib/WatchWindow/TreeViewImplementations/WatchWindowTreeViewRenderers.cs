@@ -1,8 +1,8 @@
 ﻿namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
-public class TreeViewRenderers : ITreeViewRenderers
+public class WatchWindowTreeViewRenderers : IWatchWindowTreeViewRenderers
 {
-    public TreeViewRenderers(
+    public WatchWindowTreeViewRenderers(
         Type treeViewTextRenderer,
         Type treeViewReflectionRenderer,
         Type treeViewPropertiesRenderer,

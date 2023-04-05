@@ -4,19 +4,19 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 
 public class TreeViewException : TreeViewWithType<Exception>
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewException(
         Exception exception,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             exception,
             isExpandable,
             isExpanded)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override bool Equals(object? obj)
@@ -38,7 +38,7 @@ public class TreeViewException : TreeViewWithType<Exception>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewExceptionRenderer,
+            _watchWindowTreeViewRenderers.TreeViewExceptionRenderer,
             new Dictionary<string, object?>
             {
                 {

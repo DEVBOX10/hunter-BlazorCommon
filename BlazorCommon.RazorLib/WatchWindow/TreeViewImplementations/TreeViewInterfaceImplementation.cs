@@ -12,26 +12,26 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 /// </summary>
 public class TreeViewInterfaceImplementation : TreeViewReflection
 {
-    private readonly ITreeViewRenderers _treeViewRenderers;
+    private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewInterfaceImplementation(
         TextEditorDebugObjectWrap textEditorDebugObjectWrap,
         bool isExpandable,
         bool isExpanded,
-        ITreeViewRenderers treeViewRenderers)
+        IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
             textEditorDebugObjectWrap,
             isExpandable,
             isExpanded,
-            treeViewRenderers)
+            watchWindowTreeViewRenderers)
     {
-        _treeViewRenderers = treeViewRenderers;
+        _watchWindowTreeViewRenderers = watchWindowTreeViewRenderers;
     }
     
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _treeViewRenderers.TreeViewInterfaceImplementationRenderer,
+            _watchWindowTreeViewRenderers.TreeViewInterfaceImplementationRenderer,
             new Dictionary<string, object?>
             {
                 {
