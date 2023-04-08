@@ -560,11 +560,13 @@ public partial class TreeViewStateContainer
             {
                 outTreeViewState.ActiveNode.IsExpanded = true;
 
-                outTreeViewState.ActiveNode
-                    .LoadChildrenAsync()
-                    .Wait();
+                _ = Task.Run(async () =>
+                {
+                    await outTreeViewState.ActiveNode
+                        .LoadChildrenAsync();
                     
-                PerformMarkForRerender(outTreeViewState.ActiveNode);
+                    PerformMarkForRerender(outTreeViewState.ActiveNode);
+                });
             }
             
             var nextList = inTreeViewStateContainer.TreeViewStatesList.Replace(
