@@ -61,7 +61,8 @@ public partial class TreeViewStateContainer
     
     public record MoveRightAction(
         TreeViewStateKey TreeViewStateKey,
-        bool ShiftKey);
+        bool ShiftKey,
+        Action<TreeViewNoType> LoadChildrenAction);
     
     public record MoveHomeAction(
         TreeViewStateKey TreeViewStateKey,
@@ -70,6 +71,10 @@ public partial class TreeViewStateContainer
     public record MoveEndAction(
         TreeViewStateKey TreeViewStateKey,
         bool ShiftKey);
+    
+    public record LoadChildrenAction(
+        TreeViewStateKey TreeViewStateKey,
+        TreeViewNoType TreeViewNoType);
     
     public record DisposeTreeViewStateAction(
         TreeViewStateKey TreeViewStateKey);

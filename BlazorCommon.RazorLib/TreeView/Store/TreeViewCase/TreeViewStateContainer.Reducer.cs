@@ -7,7 +7,7 @@ namespace BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
 
 public partial class TreeViewStateContainer
 {
-    private class TreeViewStateContainerReducer
+    private class Reducer
     {
         [ReducerMethod]
         public static TreeViewStateContainer ReduceRegisterTreeViewStateAction(
@@ -560,13 +560,8 @@ public partial class TreeViewStateContainer
             {
                 outTreeViewState.ActiveNode.IsExpanded = true;
 
-                _ = Task.Run(async () =>
-                {
-                    await outTreeViewState.ActiveNode
-                        .LoadChildrenAsync();
-                    
-                    PerformMarkForRerender(outTreeViewState.ActiveNode);
-                });
+                moveRightAction.LoadChildrenAction
+                    .Invoke(outTreeViewState.ActiveNode);
             }
             
             var nextList = inTreeViewStateContainer.TreeViewStatesList.Replace(
