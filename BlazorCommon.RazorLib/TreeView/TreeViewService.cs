@@ -168,7 +168,15 @@ public class TreeViewService : ITreeViewService
     {
         var moveActiveSelectionRightAction = new TreeViewStateContainer.MoveRightAction(
             treeViewStateKey,
-            shiftKey);
+            shiftKey,
+            treeViewNoType =>
+            {
+                var loadChildrenAction = new TreeViewStateContainer.LoadChildrenAction(
+                    treeViewStateKey,
+                    treeViewNoType);
+                
+                _dispatcher.Dispatch(loadChildrenAction);
+            });
 
         _dispatcher.Dispatch(moveActiveSelectionRightAction);
     }
