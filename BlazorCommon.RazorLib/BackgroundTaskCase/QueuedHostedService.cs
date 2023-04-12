@@ -66,7 +66,7 @@ public class QueuedHostedService : BackgroundService
                             {
                                 {
                                     nameof(IErrorNotificationRendererType.Message),
-                                    string.Format(message, backgroundTask.Name)
+                                    string.Format($"backgroundTask.Name => {ex.Message}")
                                 }
                             },
                             null,
