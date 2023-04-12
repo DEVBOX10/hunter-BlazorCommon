@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using BlazorCommon.RazorLib.BackgroundTaskCase;
 using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Dimensions;
 using BlazorCommon.RazorLib.Html;
@@ -17,6 +18,8 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
     private IState<AppOptionsState> AppOptionsStateWrap { get; set; } = null!;
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
+    [Inject]
+    private IBackgroundTaskQueue BackgroundTaskQueue { get; set; } = null!;
     
     [Parameter, EditorRequired]
     public NotificationRecord NotificationRecord { get; set; } = null!;
@@ -63,14 +66,23 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
             
             if (notificationRecord.NotificationOverlayLifespan is not null)
             {
-                _ = Task.Run(async () =>
-                {
-                    await Task.Delay(
-                        notificationRecord.NotificationOverlayLifespan.Value,
-                        _notificationOverlayCancellationTokenSource.Token);
+                var backgroundTask = new BackgroundTask(
+                    async cancellationToken =>
+                    {
+                        await Task.Delay(
+                            notificationRecord.NotificationOverlayLifespan.Value,
+                            _notificationOverlayCancellationTokenSource.Token);
                 
-                    DisposeNotification();
-                });
+                        DisposeNotification();
+                    },
+                    "DisposeNotificationTask",
+                    "TODO: Describe this task",
+                    false,
+                    _ =>  Task.CompletedTask,
+                    Dispatcher,
+                    CancellationToken.None);
+
+                BackgroundTaskQueue.QueueBackgroundWorkItem(backgroundTask);
             }
         }
         
