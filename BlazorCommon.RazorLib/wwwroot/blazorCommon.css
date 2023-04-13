@@ -111,6 +111,11 @@
     border-left: 2px solid var(--bcrl_primary-border-color);
 }
 
+em.bcrl_em {
+    color: var(--bcrl_primary-emphasis-foreground-color);
+    font-style: normal;
+}
+
 .bcrl_primary {
     background-color: var(--bcrl_primary-general-use-color);
 }
