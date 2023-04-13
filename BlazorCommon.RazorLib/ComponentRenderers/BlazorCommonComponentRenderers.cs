@@ -6,7 +6,6 @@ public class BlazorCommonComponentRenderers : IBlazorCommonComponentRenderers
 {
     public BlazorCommonComponentRenderers(
         Type? backgroundTaskDisplayRendererType,
-        Type? booleanPromptOrCancelRendererType,
         Type? errorNotificationRendererType,
         Type? informativeNotificationRendererType,
         Type? treeViewExceptionRendererType,
@@ -14,7 +13,6 @@ public class BlazorCommonComponentRenderers : IBlazorCommonComponentRenderers
         IWatchWindowTreeViewRenderers? watchWindowTreeViewRenderers)
     {
         BackgroundTaskDisplayRendererType = backgroundTaskDisplayRendererType;
-        BooleanPromptOrCancelRendererType = booleanPromptOrCancelRendererType;
         ErrorNotificationRendererType = errorNotificationRendererType;
         InformativeNotificationRendererType = informativeNotificationRendererType;
         TreeViewExceptionRendererType = treeViewExceptionRendererType;
@@ -23,7 +21,6 @@ public class BlazorCommonComponentRenderers : IBlazorCommonComponentRenderers
     }
 
     public Type? BackgroundTaskDisplayRendererType { get; }
-    public Type? BooleanPromptOrCancelRendererType { get; }
     public Type? ErrorNotificationRendererType { get; }
     public Type? InformativeNotificationRendererType { get; }
     public Type? TreeViewExceptionRendererType { get; }

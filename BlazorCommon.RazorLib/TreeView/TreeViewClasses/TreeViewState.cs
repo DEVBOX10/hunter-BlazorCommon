@@ -30,4 +30,5 @@ public record TreeViewState
     /// will be treated as the single selected node.
     /// </summary>
     public ImmutableList<TreeViewNoType> SelectedNodes { get; init; }
+    public Guid StateId { get; init; } = Guid.NewGuid();
 }

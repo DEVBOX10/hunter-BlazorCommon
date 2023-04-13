@@ -19,7 +19,7 @@ public partial class TreeViewStateContainer
                 .LoadChildrenAsync()
                 .ConfigureAwait(false);
             
-            var replaceNodeAction = new ReRenderNodeAction(
+            var replaceNodeAction = new ReRenderSpecifiedNodeAction(
                 loadChildrenAction.TreeViewStateKey,
                 loadChildrenAction.TreeViewNoType);
         

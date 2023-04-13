@@ -5,7 +5,6 @@ namespace BlazorCommon.RazorLib.ComponentRenderers;
 public interface IBlazorCommonComponentRenderers
 {
     public Type? BackgroundTaskDisplayRendererType { get; }
-    public Type? BooleanPromptOrCancelRendererType { get; }
     public Type? ErrorNotificationRendererType { get; }
     public Type? InformativeNotificationRendererType { get; }
     public Type? TreeViewExceptionRendererType { get; }

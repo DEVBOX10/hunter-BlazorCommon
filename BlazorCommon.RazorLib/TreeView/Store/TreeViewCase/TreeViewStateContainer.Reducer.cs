@@ -101,7 +101,7 @@ public partial class TreeViewStateContainer
             
             parent.Children.Add(child);
 
-            var rerenderNodeAction = new ReRenderNodeAction(
+            var rerenderNodeAction = new ReRenderSpecifiedNodeAction(
                 addChildNodeAction.TreeViewStateKey, 
                 parent);
             
@@ -113,13 +113,29 @@ public partial class TreeViewStateContainer
         [ReducerMethod]
         public static TreeViewStateContainer ReduceReRenderNodeAction(
             TreeViewStateContainer inTreeViewStateContainer,
-            ReRenderNodeAction reRenderNodeAction)
+            ReRenderSpecifiedNodeAction reRenderSpecifiedNodeAction)
         {
-            PerformMarkForRerender(reRenderNodeAction.Node);
+            var existingTreeViewState = inTreeViewStateContainer.TreeViewStatesList
+                .FirstOrDefault(x =>
+                    x.TreeViewStateKey == reRenderSpecifiedNodeAction.TreeViewStateKey);
+            
+            if (existingTreeViewState is null)
+                return inTreeViewStateContainer;
+            
+            PerformMarkForRerender(reRenderSpecifiedNodeAction.Node);
+            
+            var nextTreeViewState = existingTreeViewState with
+            {
+                StateId = Guid.NewGuid()
+            };
+            
+            var nextList = inTreeViewStateContainer.TreeViewStatesList.Replace(
+                existingTreeViewState, 
+                nextTreeViewState);
 
             return new TreeViewStateContainer
             {
-                TreeViewStatesList = inTreeViewStateContainer.TreeViewStatesList 
+                TreeViewStatesList = nextList
             };
         }
         
@@ -277,7 +293,7 @@ public partial class TreeViewStateContainer
             {
                 outTreeViewState.ActiveNode.IsExpanded = false;
 
-                var reRenderNodeAction = new ReRenderNodeAction(
+                var reRenderNodeAction = new ReRenderSpecifiedNodeAction(
                     outTreeViewState.TreeViewStateKey,
                     outTreeViewState.ActiveNode);
                 
