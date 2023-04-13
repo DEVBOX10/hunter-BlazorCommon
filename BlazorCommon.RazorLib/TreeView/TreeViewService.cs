@@ -1,4 +1,5 @@
-﻿using BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
+﻿using BlazorCommon.RazorLib.BackgroundTaskCase;
+using BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Fluxor;
 
@@ -7,15 +8,18 @@ namespace BlazorCommon.RazorLib.TreeView;
 public class TreeViewService : ITreeViewService
 {
     private readonly IDispatcher _dispatcher;
+    private readonly IBackgroundTaskQueue _backgroundTaskQueue;
 
     public TreeViewService(
         bool isEnabled,
         IState<TreeViewStateContainer> treeViewStateContainerWrap,
-        IDispatcher dispatcher)
+        IDispatcher dispatcher,
+        IBackgroundTaskQueue backgroundTaskQueue)
     {
         IsEnabled = isEnabled;
         TreeViewStateContainerWrap = treeViewStateContainerWrap;
         _dispatcher = dispatcher;
+        _backgroundTaskQueue = backgroundTaskQueue;
     }
 
     public bool IsEnabled { get; }
@@ -67,7 +71,7 @@ public class TreeViewService : ITreeViewService
         TreeViewStateKey treeViewStateKey,
         TreeViewNoType node)
     {
-        var replaceNodeAction = new TreeViewStateContainer.ReRenderNodeAction(
+        var replaceNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
             treeViewStateKey,
             node);
         
@@ -171,11 +175,27 @@ public class TreeViewService : ITreeViewService
             shiftKey,
             treeViewNoType =>
             {
-                var loadChildrenAction = new TreeViewStateContainer.LoadChildrenAction(
-                    treeViewStateKey,
-                    treeViewNoType);
-                
-                _dispatcher.Dispatch(loadChildrenAction);
+                var backgroundTask = new BackgroundTask(
+                    async cancellationToken =>
+                    {
+                        await treeViewNoType
+                            .LoadChildrenAsync()
+                            .ConfigureAwait(false);
+            
+                        var reRenderActiveNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
+                            treeViewStateKey,
+                            treeViewNoType);
+        
+                        _dispatcher.Dispatch(reRenderActiveNodeAction);
+                    },
+                    "LoadChildrenAsyncTask",
+                    "TODO: Describe this task",
+                    false,
+                    _ =>  Task.CompletedTask,
+                    _dispatcher,
+                    CancellationToken.None);
+
+                _backgroundTaskQueue.QueueBackgroundWorkItem(backgroundTask);
             });
 
         _dispatcher.Dispatch(moveActiveSelectionRightAction);

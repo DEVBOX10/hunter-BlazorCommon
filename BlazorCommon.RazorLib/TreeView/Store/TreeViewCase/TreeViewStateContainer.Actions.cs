@@ -23,7 +23,7 @@ public partial class TreeViewStateContainer
         TreeViewNoType Parent,
         TreeViewNoType Child);
     
-    public record ReRenderNodeAction(
+    public record ReRenderSpecifiedNodeAction(
         TreeViewStateKey TreeViewStateKey,
         TreeViewNoType Node);
     
