@@ -42,7 +42,8 @@ public class QueuedHostedService : BackgroundService
                 try
                 {
                     TaskMonitor.SetExecutingBackgroundTask(backgroundTask);
-                    await backgroundTask.InvokeWorkItem(cancellationToken);
+                    
+                    var task = backgroundTask.InvokeWorkItem(cancellationToken);
                 }
                 catch (Exception ex)
                 {

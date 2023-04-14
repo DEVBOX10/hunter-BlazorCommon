@@ -175,27 +175,20 @@ public class TreeViewService : ITreeViewService
             shiftKey,
             treeViewNoType =>
             {
-                var backgroundTask = new BackgroundTask(
-                    async cancellationToken =>
-                    {
-                        await treeViewNoType
-                            .LoadChildrenAsync()
-                            .ConfigureAwait(false);
+                // IBackgroundTaskQueue does not work well here because
+                // this Task does not need to be tracked.
+                _ = Task.Run(async () =>
+                {
+                    await treeViewNoType
+                        .LoadChildrenAsync()
+                        .ConfigureAwait(false);
             
-                        var reRenderActiveNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
-                            treeViewStateKey,
-                            treeViewNoType);
+                    var reRenderActiveNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
+                        treeViewStateKey,
+                        treeViewNoType);
         
-                        _dispatcher.Dispatch(reRenderActiveNodeAction);
-                    },
-                    "LoadChildrenAsyncTask",
-                    "TODO: Describe this task",
-                    false,
-                    _ =>  Task.CompletedTask,
-                    _dispatcher,
-                    CancellationToken.None);
-
-                _backgroundTaskQueue.QueueBackgroundWorkItem(backgroundTask);
+                    _dispatcher.Dispatch(reRenderActiveNodeAction);
+                }, CancellationToken.None);
             });
 
         _dispatcher.Dispatch(moveActiveSelectionRightAction);
