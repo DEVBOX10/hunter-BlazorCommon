@@ -66,23 +66,16 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
             
             if (notificationRecord.NotificationOverlayLifespan is not null)
             {
-                var backgroundTask = new BackgroundTask(
-                    async cancellationToken =>
-                    {
-                        await Task.Delay(
-                            notificationRecord.NotificationOverlayLifespan.Value,
-                            _notificationOverlayCancellationTokenSource.Token);
+                // IBackgroundTaskQueue does not work well here because
+                // this Task does not need to be tracked.
+                _ = Task.Run(async () =>
+                {
+                    await Task.Delay(
+                        notificationRecord.NotificationOverlayLifespan.Value,
+                        _notificationOverlayCancellationTokenSource.Token);
                 
-                        DisposeNotification();
-                    },
-                    "DisposeNotificationTask",
-                    "TODO: Describe this task",
-                    false,
-                    _ =>  Task.CompletedTask,
-                    Dispatcher,
-                    CancellationToken.None);
-
-                BackgroundTaskQueue.QueueBackgroundWorkItem(backgroundTask);
+                    DisposeNotification();
+                }, CancellationToken.None);
             }
         }
         
