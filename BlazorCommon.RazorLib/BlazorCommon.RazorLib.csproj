@@ -31,10 +31,10 @@
       <_ContentIncludedByDefault Remove="DialogNotification\Notification\CommonInformativeNotificationDisplay.razor" />
       <_ContentIncludedByDefault Remove="DialogNotification\Notification\NotificationDisplay.razor" />
       <_ContentIncludedByDefault Remove="WatchWindow\NavLinks\BalcTreeViewNavLinks.razor" />
+      <_ContentIncludedByDefault Remove="BackgroundTaskCase\BackgroundTaskDisplay.razor" />
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="BackgroundTaskCase\BackgroundTaskDisplay.razor" />
       <AdditionalFiles Include="WatchWindow\WatchWindowExample\LabeledCounter.razor" />
       <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugContextMenuDisplay.razor" />
       <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugDisplay.razor" />
