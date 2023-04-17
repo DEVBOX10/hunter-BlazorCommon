@@ -74,6 +74,56 @@ public static class KeyboardKeyFacts
                 return false;
         }
     }
+    
+    public static char? MatchPunctuationCharacter(char character)
+    {
+        switch (character)
+        {
+            case PunctuationCharacters.OPEN_CURLY_BRACE:
+                return PunctuationCharacters.CLOSE_CURLY_BRACE;
+            case PunctuationCharacters.CLOSE_CURLY_BRACE:
+                return PunctuationCharacters.OPEN_CURLY_BRACE;
+            case PunctuationCharacters.OPEN_PARENTHESIS:
+                return PunctuationCharacters.CLOSE_PARENTHESIS;
+            case PunctuationCharacters.CLOSE_PARENTHESIS:
+                return PunctuationCharacters.OPEN_PARENTHESIS;
+            case PunctuationCharacters.OPEN_SQUARE_BRACKET:
+                return PunctuationCharacters.CLOSE_SQUARE_BRACKET;
+            case PunctuationCharacters.CLOSE_SQUARE_BRACKET:
+                return PunctuationCharacters.OPEN_SQUARE_BRACKET;
+            case PunctuationCharacters.OPEN_ARROW_BRACKET:
+                return PunctuationCharacters.END_ARROW_BRACKET;
+            case PunctuationCharacters.END_ARROW_BRACKET:
+                return PunctuationCharacters.OPEN_ARROW_BRACKET;
+            default:
+                return null;
+        }
+    }
+    
+    public static int? DirectionToFindMatchMatchingPunctuationCharacter(char character)
+    {
+        switch (character)
+        {
+            case PunctuationCharacters.OPEN_CURLY_BRACE:
+                return 1;
+            case PunctuationCharacters.CLOSE_CURLY_BRACE:
+                return -1;
+            case PunctuationCharacters.OPEN_PARENTHESIS:
+                return 1;
+            case PunctuationCharacters.CLOSE_PARENTHESIS:
+                return -1;
+            case PunctuationCharacters.OPEN_SQUARE_BRACKET:
+                return 1;
+            case PunctuationCharacters.CLOSE_SQUARE_BRACKET:
+                return -1;
+            case PunctuationCharacters.OPEN_ARROW_BRACKET:
+                return 1;
+            case PunctuationCharacters.END_ARROW_BRACKET:
+                return -1;
+            default:
+                return null;
+        }
+    }
 
     public static bool IsWhitespaceCode(string code)
     {
