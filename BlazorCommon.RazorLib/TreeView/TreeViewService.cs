@@ -1,4 +1,7 @@
 ﻿using BlazorCommon.RazorLib.BackgroundTaskCase;
+using BlazorCommon.RazorLib.ComponentRenderers;
+using BlazorCommon.RazorLib.ComponentRenderers.Types;
+using BlazorCommon.RazorLib.Notification;
 using BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Fluxor;
@@ -9,17 +12,20 @@ public class TreeViewService : ITreeViewService
 {
     private readonly IDispatcher _dispatcher;
     private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+    private readonly IBlazorCommonComponentRenderers _blazorCommonComponentRenderers;
 
     public TreeViewService(
         bool isEnabled,
         IState<TreeViewStateContainer> treeViewStateContainerWrap,
         IDispatcher dispatcher,
-        IBackgroundTaskQueue backgroundTaskQueue)
+        IBackgroundTaskQueue backgroundTaskQueue,
+        IBlazorCommonComponentRenderers blazorCommonComponentRenderers)
     {
         IsEnabled = isEnabled;
         TreeViewStateContainerWrap = treeViewStateContainerWrap;
         _dispatcher = dispatcher;
         _backgroundTaskQueue = backgroundTaskQueue;
+        _blazorCommonComponentRenderers = blazorCommonComponentRenderers;
     }
 
     public bool IsEnabled { get; }
@@ -179,15 +185,23 @@ public class TreeViewService : ITreeViewService
                 // this Task does not need to be tracked.
                 _ = Task.Run(async () =>
                 {
-                    await treeViewNoType
-                        .LoadChildrenAsync()
-                        .ConfigureAwait(false);
+                    try
+                    {
+                        await treeViewNoType
+                            .LoadChildrenAsync()
+                            .ConfigureAwait(false);
             
-                    var reRenderActiveNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
-                        treeViewStateKey,
-                        treeViewNoType);
+                        var reRenderActiveNodeAction = new TreeViewStateContainer.ReRenderSpecifiedNodeAction(
+                            treeViewStateKey,
+                            treeViewNoType);
         
-                    _dispatcher.Dispatch(reRenderActiveNodeAction);
+                        _dispatcher.Dispatch(reRenderActiveNodeAction);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }, CancellationToken.None);
             });
 

@@ -90,16 +90,15 @@ public partial class TreeViewDisplay : ComponentBase
             var localTreeViewTitleElementReference = _treeViewTitleElementReference;
 
             if (localTreeViewTitleElementReference is not null)
-            {
-                await localTreeViewTitleElementReference.Value
-                    .FocusAsync();
-            }
+                    await localTreeViewTitleElementReference.Value.FocusAsync();
+                
         }
-        catch (JSException)
+        catch (Exception e)
         {
-            // Caused when calling:
-            // await (ElementReference).FocusAsync();
-            // After component is no longer rendered
+            // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+            //             This bug is seemingly happening randomly. I have a suspicion
+            //             that there are race-condition exceptions occurring with "FocusAsync"
+            //             on an ElementReference.
         }
     }
 

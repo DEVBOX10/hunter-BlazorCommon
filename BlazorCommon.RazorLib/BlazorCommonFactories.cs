@@ -1,5 +1,6 @@
 ﻿using BlazorCommon.RazorLib.BackgroundTaskCase;
 using BlazorCommon.RazorLib.Clipboard;
+using BlazorCommon.RazorLib.ComponentRenderers;
 using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Drag;
 using BlazorCommon.RazorLib.Dropdown;
@@ -72,5 +73,6 @@ public record BlazorCommonFactories
             true,
             serviceProvider.GetRequiredService<IState<TreeViewStateContainer>>(),
             serviceProvider.GetRequiredService<IDispatcher>(),
-            serviceProvider.GetRequiredService<IBackgroundTaskQueue>());
+            serviceProvider.GetRequiredService<IBackgroundTaskQueue>(),
+    serviceProvider.GetRequiredService<IBlazorCommonComponentRenderers>());
 }

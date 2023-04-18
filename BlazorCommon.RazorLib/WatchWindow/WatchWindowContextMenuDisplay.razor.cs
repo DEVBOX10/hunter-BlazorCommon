@@ -49,16 +49,24 @@ public partial class WatchWindowContextMenuDisplay : ComponentBase
                     // this Task does not need to be tracked.
                     _ = Task.Run(async () =>
                     {
-                        if (treeViewCommandParameter.TargetNode is null)
-                            return;
-                        
-                        await treeViewCommandParameter.TargetNode.LoadChildrenAsync();
-                        
-                        TreeViewService.ReRenderNode(
-                            WatchWindowDisplay.WatchWindowDisplayTreeViewStateKey,
-                            treeViewCommandParameter.TargetNode);
+                        try
+                        {           
+                            if (treeViewCommandParameter.TargetNode is null)
+                                return;
+                            
+                            await treeViewCommandParameter.TargetNode.LoadChildrenAsync();
+                            
+                            TreeViewService.ReRenderNode(
+                                WatchWindowDisplay.WatchWindowDisplayTreeViewStateKey,
+                                treeViewCommandParameter.TargetNode);
 
-                        await InvokeAsync(StateHasChanged);
+                            await InvokeAsync(StateHasChanged);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
                     }, CancellationToken.None);
                 }));
         
