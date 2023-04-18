@@ -1,4 +1,4 @@
-﻿using BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+﻿using BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
 namespace BlazorCommon.RazorLib.ComponentRenderers.Types;
 

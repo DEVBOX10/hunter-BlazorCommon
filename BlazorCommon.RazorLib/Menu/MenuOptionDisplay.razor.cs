@@ -74,7 +74,17 @@ public partial class MenuOptionDisplay : ComponentBase
             !DisplayWidget &&
             _menuOptionDisplayElementReference.HasValue)
         {
-            await _menuOptionDisplayElementReference.Value.FocusAsync();
+            try
+            {
+                await _menuOptionDisplayElementReference.Value.FocusAsync();
+            }
+            catch (Exception e)
+            {
+                // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                //             This bug is seemingly happening randomly. I have a suspicion
+                //             that there are race-condition exceptions occurring with "FocusAsync"
+                //             on an ElementReference.
+            }
         }
         
         await base.OnParametersSetAsync();
@@ -129,8 +139,18 @@ public partial class MenuOptionDisplay : ComponentBase
 
         if (onAfterWidgetHidden is null)
         {
-            if (_menuOptionDisplayElementReference.HasValue)
-                await _menuOptionDisplayElementReference.Value.FocusAsync();
+            try
+            {
+                if (_menuOptionDisplayElementReference.HasValue)
+                    await _menuOptionDisplayElementReference.Value.FocusAsync();
+            }
+            catch (Exception e)
+            {
+                // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                //             This bug is seemingly happening randomly. I have a suspicion
+                //             that there are race-condition exceptions occurring with "FocusAsync"
+                //             on an ElementReference.
+            }
         }
         else
         {

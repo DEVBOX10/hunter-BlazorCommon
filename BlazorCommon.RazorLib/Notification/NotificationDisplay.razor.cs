@@ -70,11 +70,19 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
                 // this Task does not need to be tracked.
                 _ = Task.Run(async () =>
                 {
-                    await Task.Delay(
-                        notificationRecord.NotificationOverlayLifespan.Value,
-                        _notificationOverlayCancellationTokenSource.Token);
-                
-                    DisposeNotification();
+                    try
+                    {           
+                        await Task.Delay(
+                            notificationRecord.NotificationOverlayLifespan.Value,
+                            _notificationOverlayCancellationTokenSource.Token);
+                    
+                        DisposeNotification();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                 }, CancellationToken.None);
             }
         }

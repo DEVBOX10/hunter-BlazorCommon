@@ -1,5 +1,6 @@
 ﻿using BlazorCommon.RazorLib.BackgroundTaskCase;
 using BlazorCommon.RazorLib.Clipboard;
+using BlazorCommon.RazorLib.ComponentRenderers;
 using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Drag;
 using BlazorCommon.RazorLib.Dropdown;
@@ -11,9 +12,9 @@ using BlazorCommon.RazorLib.Store.DialogCase;
 using BlazorCommon.RazorLib.Store.DropdownCase;
 using BlazorCommon.RazorLib.Store.NotificationCase;
 using BlazorCommon.RazorLib.Store.ThemeCase;
+using BlazorCommon.RazorLib.Store.TreeViewCase;
 using BlazorCommon.RazorLib.Theme;
 using BlazorCommon.RazorLib.TreeView;
-using BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
 using Fluxor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
@@ -72,5 +73,6 @@ public record BlazorCommonFactories
             true,
             serviceProvider.GetRequiredService<IState<TreeViewStateContainer>>(),
             serviceProvider.GetRequiredService<IDispatcher>(),
-            serviceProvider.GetRequiredService<IBackgroundTaskQueue>());
+            serviceProvider.GetRequiredService<IBackgroundTaskQueue>(),
+    serviceProvider.GetRequiredService<IBlazorCommonComponentRenderers>());
 }

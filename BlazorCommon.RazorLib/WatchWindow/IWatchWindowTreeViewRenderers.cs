@@ -1,4 +1,4 @@
-﻿namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+﻿namespace BlazorCommon.RazorLib.WatchWindow;
 
 public interface IWatchWindowTreeViewRenderers
 {

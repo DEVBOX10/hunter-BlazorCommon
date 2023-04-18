@@ -1,8 +1,8 @@
 ﻿using BlazorCommon.RazorLib.Dimensions;
 using BlazorCommon.RazorLib.JavaScriptObjects;
+using BlazorCommon.RazorLib.Store.TreeViewCase;
 using BlazorCommon.RazorLib.TreeView.Commands;
 using BlazorCommon.RazorLib.TreeView.Events;
-using BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
@@ -98,8 +98,18 @@ public partial class TreeViewStateDisplay : FluxorComponent
 
                 var localTreeViewStateDisplayElementReference = _treeViewStateDisplayElementReference;
                 
-                if (localTreeViewStateDisplayElementReference.HasValue)
-                    await localTreeViewStateDisplayElementReference.Value.FocusAsync();
+                try
+                {
+                    if (localTreeViewStateDisplayElementReference.HasValue)
+                        await localTreeViewStateDisplayElementReference.Value.FocusAsync();
+                }
+                catch (Exception e)
+                {
+                    // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                    //             This bug is seemingly happening randomly. I have a suspicion
+                    //             that there are race-condition exceptions occurring with "FocusAsync"
+                    //             on an ElementReference.
+                }
             },
             null,
             null,
@@ -173,8 +183,18 @@ public partial class TreeViewStateDisplay : FluxorComponent
 
                 var localTreeViewStateDisplayElementReference = _treeViewStateDisplayElementReference;
                 
-                if (localTreeViewStateDisplayElementReference.HasValue)
-                    await localTreeViewStateDisplayElementReference.Value.FocusAsync();
+                try
+                {
+                    if (localTreeViewStateDisplayElementReference.HasValue)
+                        await localTreeViewStateDisplayElementReference.Value.FocusAsync();
+                }
+                catch (Exception e)
+                {
+                    // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                    //             This bug is seemingly happening randomly. I have a suspicion
+                    //             that there are race-condition exceptions occurring with "FocusAsync"
+                    //             on an ElementReference.
+                }
             },
             contextMenuFixedPosition,
             mouseEventArgs,

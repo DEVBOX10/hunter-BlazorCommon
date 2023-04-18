@@ -12,8 +12,8 @@ public partial class MenuDisplay : ComponentBase
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
     
-    [CascadingParameter(Name="ReturnFocusToParentAction")]
-    public Action? ReturnFocusToParentAction { get; set; }
+    [CascadingParameter(Name="ReturnFocusToParentFuncAsync")]
+    public Func<Task>? ReturnFocusToParentFuncAsync { get; set; }
     [CascadingParameter]
     public DropdownKey? DropdownKey { get; set; }
     
@@ -36,7 +36,7 @@ public partial class MenuDisplay : ComponentBase
     /// </summary>
     private int _activeMenuOptionRecordIndex = -1;
     
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
@@ -46,33 +46,53 @@ public partial class MenuDisplay : ComponentBase
                 _activeMenuOptionRecordIndex == -1 &&
                 _menuDisplayElementReference is not null)
             {
-                _menuDisplayElementReference.Value.FocusAsync();
+                try
+                {
+                    await _menuDisplayElementReference.Value.FocusAsync();
+                }
+                catch (Exception e)
+                {
+                    // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                    //             This bug is seemingly happening randomly. I have a suspicion
+                    //             that there are race-condition exceptions occurring with "FocusAsync"
+                    //             on an ElementReference.
+                }
             }
             else
             {
-                InvokeAsync(StateHasChanged);
+                await InvokeAsync(StateHasChanged);
             }
         }
         
-        return base.OnAfterRenderAsync(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
     }
     
-    public void SetFocusToFirstOptionInMenu()
+    public async Task SetFocusToFirstOptionInMenuAsync()
     {
         _activeMenuOptionRecordIndex = 0;
 
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
 
-    private void RestoreFocusToThisMenu()
+    private async Task RestoreFocusToThisMenuAsync()
     {
         if (_activeMenuOptionRecordIndex == -1)
         {
-            if (_menuDisplayElementReference is not null)
-                _menuDisplayElementReference.Value.FocusAsync();
+            try
+            {
+                if (_menuDisplayElementReference is not null)
+                    await _menuDisplayElementReference.Value.FocusAsync();
+            }
+            catch (Exception e)
+            {
+                // 2023-04-18: The app has had a bug where it "freezes" and must be restarted.
+                //             This bug is seemingly happening randomly. I have a suspicion
+                //             that there are race-condition exceptions occurring with "FocusAsync"
+                //             on an ElementReference.
+            }
+        
+            await InvokeAsync(StateHasChanged);
         }
-
-        InvokeAsync(StateHasChanged);
     }
 
     private void HandleOnKeyDown(KeyboardEventArgs keyboardEventArgs)
@@ -88,10 +108,10 @@ public partial class MenuDisplay : ComponentBase
             case KeyboardKeyFacts.MovementKeys.ARROW_LEFT:
             case KeyboardKeyFacts.AlternateMovementKeys.ARROW_LEFT:
                 if (DropdownKey is not null &&
-                    ReturnFocusToParentAction is not null)
+                    ReturnFocusToParentFuncAsync is not null)
                 {
                     Dispatcher.Dispatch(new DropdownsState.RemoveActiveAction(DropdownKey));
-                    ReturnFocusToParentAction.Invoke();
+                    ReturnFocusToParentFuncAsync.Invoke();
                 }
                 break;
             case KeyboardKeyFacts.MovementKeys.ARROW_DOWN:
@@ -118,8 +138,8 @@ public partial class MenuDisplay : ComponentBase
                 if (DropdownKey is not null)
                     Dispatcher.Dispatch(new DropdownsState.RemoveActiveAction(DropdownKey));
 
-                if (ReturnFocusToParentAction is not null)
-                    ReturnFocusToParentAction.Invoke();
+                if (ReturnFocusToParentFuncAsync is not null)
+                    ReturnFocusToParentFuncAsync.Invoke();
                 
                 break;
         }

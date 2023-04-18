@@ -6,9 +6,9 @@ using BlazorCommon.RazorLib.TreeView.Commands;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorCommon.RazorLib.WatchWindow.WatchWindowExample;
+namespace BlazorCommon.RazorLib.WatchWindow;
 
-public partial class TextEditorDebugContextMenuDisplay : ComponentBase
+public partial class WatchWindowContextMenuDisplay : ComponentBase
 {
     [Inject]
     private ITreeViewService TreeViewService { get; set; } = null!;
@@ -49,16 +49,24 @@ public partial class TextEditorDebugContextMenuDisplay : ComponentBase
                     // this Task does not need to be tracked.
                     _ = Task.Run(async () =>
                     {
-                        if (treeViewCommandParameter.TargetNode is null)
-                            return;
-                        
-                        await treeViewCommandParameter.TargetNode.LoadChildrenAsync();
-                        
-                        TreeViewService.ReRenderNode(
-                            TextEditorDebugDisplay.TextEditorDebugTreeViewStateKey,
-                            treeViewCommandParameter.TargetNode);
+                        try
+                        {           
+                            if (treeViewCommandParameter.TargetNode is null)
+                                return;
+                            
+                            await treeViewCommandParameter.TargetNode.LoadChildrenAsync();
+                            
+                            TreeViewService.ReRenderNode(
+                                WatchWindowDisplay.WatchWindowDisplayTreeViewStateKey,
+                                treeViewCommandParameter.TargetNode);
 
-                        await InvokeAsync(StateHasChanged);
+                            await InvokeAsync(StateHasChanged);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
                     }, CancellationToken.None);
                 }));
         

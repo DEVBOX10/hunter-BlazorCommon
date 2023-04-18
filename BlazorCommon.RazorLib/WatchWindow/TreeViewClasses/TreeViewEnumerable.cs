@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
-public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
+public class TreeViewEnumerable : TreeViewWithType<WatchWindowObjectWrap>
 {
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewEnumerable(
-        TextEditorDebugObjectWrap textEditorDebugObjectWrap,
+        WatchWindowObjectWrap watchWindowObjectWrap,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            textEditorDebugObjectWrap,
+            watchWindowObjectWrap,
             isExpandable,
             isExpanded)
     {
@@ -71,7 +71,7 @@ public class TreeViewEnumerable : TreeViewWithType<TextEditorDebugObjectWrap>
                 {
                     var entry = enumerator.Current;
                     
-                    var childNode = new TextEditorDebugObjectWrap(
+                    var childNode = new WatchWindowObjectWrap(
                         entry,
                         genericArgument,
                         genericArgument.Name,

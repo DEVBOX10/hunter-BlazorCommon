@@ -1,18 +1,18 @@
 ﻿using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
-public class TreeViewException : TreeViewWithType<Exception>
+public class TreeViewText : TreeViewWithType<string>
 {
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
-    public TreeViewException(
-        Exception exception,
+    public TreeViewText(
+        string text,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            exception,
+            text,
             isExpandable,
             isExpanded)
     {
@@ -22,12 +22,12 @@ public class TreeViewException : TreeViewWithType<Exception>
     public override bool Equals(object? obj)
     {
         if (obj is null ||
-            obj is not TreeViewException treeViewException)
+            obj is not TreeViewText treeViewText)
         {
             return false;
         }
 
-        return treeViewException.Item == Item;
+        return treeViewText.Item == Item;
     }
 
     public override int GetHashCode()
@@ -38,11 +38,11 @@ public class TreeViewException : TreeViewWithType<Exception>
     public override TreeViewRenderer GetTreeViewRenderer()
     {
         return new TreeViewRenderer(
-            _watchWindowTreeViewRenderers.TreeViewExceptionRenderer,
+            _watchWindowTreeViewRenderers.TreeViewTextRenderer,
             new Dictionary<string, object?>
             {
                 {
-                    nameof(TreeViewException),
+                    nameof(TreeViewText),
                     this
                 },
             });
