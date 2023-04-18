@@ -91,7 +91,6 @@ public partial class TreeViewDisplay : ComponentBase
 
             if (localTreeViewTitleElementReference is not null)
                     await localTreeViewTitleElementReference.Value.FocusAsync();
-                
         }
         catch (Exception e)
         {
