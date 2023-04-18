@@ -28,7 +28,7 @@ public class Throttle<TEventArgs> : IThrottle<TEventArgs>
             throttleCancellationToken = _throttleCancellationTokenSource.Token;
         }
         
-        await _throttleSemaphoreSlim.WaitAsync(throttleCancellationToken);
+        await _throttleSemaphoreSlim.WaitAsync();
         
         try
         {
