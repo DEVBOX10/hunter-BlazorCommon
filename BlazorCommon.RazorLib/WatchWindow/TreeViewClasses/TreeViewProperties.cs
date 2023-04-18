@@ -1,19 +1,19 @@
 ﻿using System.Reflection;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
-public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
+public class TreeViewProperties : TreeViewWithType<WatchWindowObjectWrap>
 {
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewProperties(
-        TextEditorDebugObjectWrap textEditorDebugObjectWrap,
+        WatchWindowObjectWrap watchWindowObjectWrap,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            textEditorDebugObjectWrap,
+            watchWindowObjectWrap,
             isExpandable,
             isExpanded)
     {
@@ -80,7 +80,7 @@ public class TreeViewProperties : TreeViewWithType<TextEditorDebugObjectWrap>
                     var hasPublicGetter = propertyInfo.CanRead &&
                                           (propertyInfo.GetGetMethod( /*nonPublic*/ true)?.IsPublic ?? false);
             
-                    var childNode = new TextEditorDebugObjectWrap(
+                    var childNode = new WatchWindowObjectWrap(
                         childValue,
                         childType,
                         propertyInfo.Name,

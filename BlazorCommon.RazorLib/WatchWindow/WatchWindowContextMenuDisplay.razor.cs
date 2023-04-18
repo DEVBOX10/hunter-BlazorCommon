@@ -6,9 +6,9 @@ using BlazorCommon.RazorLib.TreeView.Commands;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorCommon.RazorLib.WatchWindow.WatchWindowExample;
+namespace BlazorCommon.RazorLib.WatchWindow;
 
-public partial class TextEditorDebugContextMenuDisplay : ComponentBase
+public partial class WatchWindowContextMenuDisplay : ComponentBase
 {
     [Inject]
     private ITreeViewService TreeViewService { get; set; } = null!;
@@ -55,7 +55,7 @@ public partial class TextEditorDebugContextMenuDisplay : ComponentBase
                         await treeViewCommandParameter.TargetNode.LoadChildrenAsync();
                         
                         TreeViewService.ReRenderNode(
-                            TextEditorDebugDisplay.TextEditorDebugTreeViewStateKey,
+                            WatchWindowDisplay.WatchWindowDisplayTreeViewStateKey,
                             treeViewCommandParameter.TargetNode);
 
                         await InvokeAsync(StateHasChanged);

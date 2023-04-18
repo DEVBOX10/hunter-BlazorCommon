@@ -5,7 +5,7 @@
 @using BlazorCommon.RazorLib.TreeView.Events
 
 <div class="bcrl_debug-display">
-    <TreeViewStateDisplay TreeViewStateKey="TextEditorDebugTreeViewStateKey"
+    <TreeViewStateDisplay TreeViewStateKey="WatchWindowDisplayTreeViewStateKey"
                           CssStyleString="height: 100%;"
                           OnContextMenuFunc="OnTreeViewContextMenuFunc"
                           TreeViewMouseEventHandler="new TreeViewMouseEventHandler(TreeViewService)"
@@ -13,8 +13,8 @@
     
     <DropdownDisplay DropdownKey="WatchWindowContextMenuDropdownKey"
                      DropdownPositionKind="DropdownPositionKind.Unset"
-                     CssStyleString="@TextEditorDebugContextMenuDisplay.GetContextMenuCssStyleString(_mostRecentTreeViewContextMenuCommandParameter)">
+                     CssStyleString="@WatchWindowContextMenuDisplay.GetContextMenuCssStyleString(_mostRecentTreeViewContextMenuCommandParameter)">
 
-        <TextEditorDebugContextMenuDisplay TreeViewCommandParameter="_mostRecentTreeViewContextMenuCommandParameter"/>
+        <WatchWindowContextMenuDisplay TreeViewCommandParameter="_mostRecentTreeViewContextMenuCommandParameter"/>
     </DropdownDisplay>
 </div>

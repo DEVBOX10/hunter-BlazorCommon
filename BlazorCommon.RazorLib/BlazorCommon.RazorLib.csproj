@@ -35,24 +35,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\LabeledCounter.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugContextMenuDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TextEditorDebugDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewEnumerableDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewExceptionDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewFieldsDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewInterfaceImplementationDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewPropertiesDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewReflectionDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowExample\TreeViewTextDisplay.razor" />
-      <AdditionalFiles Include="WatchWindow\WatchWindowPage.razor" />
-      <AdditionalFiles Include="Dialog\DialogDisplay.razor" />
-      <AdditionalFiles Include="Notification\CommonErrorNotificationDisplay.razor" />
-      <AdditionalFiles Include="Notification\CommonInformativeNotificationDisplay.razor" />
-      <AdditionalFiles Include="Notification\NotificationDisplay.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include="wwwroot\blazorTreeView.css" />
     </ItemGroup>
 

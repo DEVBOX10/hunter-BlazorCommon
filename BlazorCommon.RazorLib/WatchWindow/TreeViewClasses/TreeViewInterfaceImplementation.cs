@@ -1,6 +1,6 @@
 ﻿using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
 /// <summary>
 /// <see cref="TreeViewAdhoc"/> is used when the
@@ -15,12 +15,12 @@ public class TreeViewInterfaceImplementation : TreeViewReflection
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewInterfaceImplementation(
-        TextEditorDebugObjectWrap textEditorDebugObjectWrap,
+        WatchWindowObjectWrap watchWindowObjectWrap,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            textEditorDebugObjectWrap,
+            watchWindowObjectWrap,
             isExpandable,
             isExpanded,
             watchWindowTreeViewRenderers)

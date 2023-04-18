@@ -1,12 +1,12 @@
-﻿namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+﻿namespace BlazorCommon.RazorLib.WatchWindow;
 
-public class TextEditorDebugObjectWrap
+public class WatchWindowObjectWrap
 {
     /// <summary>
     /// Cannot use reflection on a null item therefore,
     /// provide the item AND the item's type.
     /// </summary>
-    public TextEditorDebugObjectWrap(
+    public WatchWindowObjectWrap(
         object? debugObjectItem,
         Type debugObjectItemType,
         string displayName,

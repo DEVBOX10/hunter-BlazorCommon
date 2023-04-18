@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
-public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
+public class TreeViewReflection : TreeViewWithType<WatchWindowObjectWrap>
 {
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewReflection(
-        TextEditorDebugObjectWrap textEditorDebugObjectWrap,
+        WatchWindowObjectWrap watchWindowObjectWrap,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            textEditorDebugObjectWrap,
+            watchWindowObjectWrap,
             isExpandable,
             isExpanded)
     {
@@ -84,7 +84,7 @@ public class TreeViewReflection : TreeViewWithType<TextEditorDebugObjectWrap>
             if (Item.DebugObjectItemType.IsInterface &&
                 Item.DebugObjectItem is not null)
             {
-                var interfaceImplementation = new TextEditorDebugObjectWrap(
+                var interfaceImplementation = new WatchWindowObjectWrap(
                     Item.DebugObjectItem,
                     Item.DebugObjectItem.GetType(),
                     "InterfaceImplementation",

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 
-namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
+namespace BlazorCommon.RazorLib.WatchWindow.TreeViewClasses;
 
 /// <summary>
 /// <see cref="TreeViewAdhoc"/> is used when the
@@ -11,17 +11,17 @@ namespace BlazorCommon.RazorLib.WatchWindow.TreeViewImplementations;
 /// To get around this <see cref="TreeViewAdhoc"/> can be used
 /// to have that top level root node be invisible to the user.
 /// </summary>
-public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
+public class TreeViewFields : TreeViewWithType<WatchWindowObjectWrap>
 {
     private readonly IWatchWindowTreeViewRenderers _watchWindowTreeViewRenderers;
 
     public TreeViewFields(
-        TextEditorDebugObjectWrap textEditorDebugObjectWrap,
+        WatchWindowObjectWrap watchWindowObjectWrap,
         bool isExpandable,
         bool isExpanded,
         IWatchWindowTreeViewRenderers watchWindowTreeViewRenderers)
         : base(
-            textEditorDebugObjectWrap,
+            watchWindowObjectWrap,
             isExpandable,
             isExpanded)
     {
@@ -80,7 +80,7 @@ public class TreeViewFields : TreeViewWithType<TextEditorDebugObjectWrap>
 
                 var childType = fieldInfo.FieldType;
             
-                var childNode = new TextEditorDebugObjectWrap(
+                var childNode = new WatchWindowObjectWrap(
                     childValue,
                     childType,
                     fieldInfo.Name,
