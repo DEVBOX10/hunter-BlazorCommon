@@ -2,7 +2,7 @@
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Fluxor;
 
-namespace BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
+namespace BlazorCommon.RazorLib.Store.TreeViewCase;
 
 [FeatureState]
 public partial class TreeViewStateContainer

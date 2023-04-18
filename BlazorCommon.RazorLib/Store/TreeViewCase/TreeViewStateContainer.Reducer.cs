@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Fluxor;
 
-namespace BlazorCommon.RazorLib.TreeView.Store.TreeViewCase;
+namespace BlazorCommon.RazorLib.Store.TreeViewCase;
 
 public partial class TreeViewStateContainer
 {
