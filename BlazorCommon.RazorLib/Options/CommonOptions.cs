@@ -5,5 +5,6 @@ namespace BlazorCommon.RazorLib.Options;
 public record CommonOptions(
     int? FontSizeInPixels,
     int? IconSizeInPixels,
-    ThemeKey? ThemeKey);
+    ThemeKey? ThemeKey,
+    string? FontFamily);
     

@@ -11,10 +11,12 @@ public interface IAppOptionsService : IBlazorCommonService
     public string StorageKey { get; }
     public IState<AppOptionsState> AppOptionsStateWrap { get; }
     public string ThemeCssClassString { get; }
+    public string? FontFamilyCssStyleString { get; }
     public string FontSizeCssStyleString { get; }
     
     public void SetActiveThemeRecordKey(ThemeKey themeKey, bool updateStorage = true);
     public void SetTheme(ThemeRecord theme, bool updateStorage = true);
+    public void SetFontFamily(string? fontFamily, bool updateStorage = true);
     public void SetFontSize(int fontSizeInPixels, bool updateStorage = true);
     public void SetIconSize(int iconSizeInPixels, bool updateStorage = true);
     public Task SetFromLocalStorageAsync();

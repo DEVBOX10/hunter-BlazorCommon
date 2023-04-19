@@ -17,7 +17,8 @@ public partial class AppOptionsState
         Options = new CommonOptions(
             DEFAULT_FONT_SIZE_IN_PIXELS,
             DEFAULT_ICON_SIZE_IN_PIXELS,
-            ThemeFacts.VisualStudioDarkThemeClone.ThemeKey);
+            ThemeFacts.VisualStudioDarkThemeClone.ThemeKey,
+            null);
     }
 
     public const int DEFAULT_FONT_SIZE_IN_PIXELS = 20;
