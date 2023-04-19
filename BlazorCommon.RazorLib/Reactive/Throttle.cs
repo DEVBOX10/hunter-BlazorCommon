@@ -22,9 +22,15 @@ public class Throttle<TEventArgs> : IThrottle<TEventArgs>
     {
         CancellationToken throttleCancellationToken;
         
+        await Task.Yield();
+        
         lock (_syncRoot)
         {
             _eventArgsStack.Push(eventArgs);
+            
+            if (_eventArgsStack.Count > 1)
+                return (default, true);
+            
             throttleCancellationToken = _throttleCancellationTokenSource.Token;
         }
         
