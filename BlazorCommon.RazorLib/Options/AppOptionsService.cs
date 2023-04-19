@@ -39,6 +39,18 @@ public class AppOptionsService : IAppOptionsService
                                                            .ThemeKey)
                                                    ?.CssClassString
                                                ?? ThemeFacts.VisualStudioDarkThemeClone.CssClassString;
+
+    public string? FontFamilyCssStyleString
+    {
+        get
+        {
+            if (AppOptionsStateWrap.Value.Options.FontFamily is null)
+                return null;
+            
+            return $"font-family: {AppOptionsStateWrap.Value.Options.FontFamily};";
+        }
+    }
+    
     
     public string FontSizeCssStyleString
     {
@@ -88,7 +100,25 @@ public class AppOptionsService : IAppOptionsService
         if (updateStorage)
             WriteToStorage();
     }
-    
+
+    public void SetFontFamily(
+        string? fontFamily,
+        bool updateStorage = true)
+    {
+        _dispatcher.Dispatch(
+            new AppOptionsState.SetAppOptionsStateAction(
+                inAppOptionsState => new AppOptionsState
+                {
+                    Options = inAppOptionsState.Options with
+                    {
+                        FontFamily = fontFamily
+                    }
+                }));
+        
+        if (updateStorage)
+            WriteToStorage();
+    }
+
     public void SetFontSize(
         int fontSizeInPixels,
         bool updateStorage = true)
@@ -147,6 +177,12 @@ public class AppOptionsService : IAppOptionsService
                     x.ThemeKey == options.ThemeKey);
 
             SetTheme(matchedTheme ?? ThemeFacts.VisualStudioDarkThemeClone,
+                false);
+        }
+        
+        if (options.FontFamily is not null)
+        {
+            SetFontFamily(options.FontFamily,
                 false);
         }
         
