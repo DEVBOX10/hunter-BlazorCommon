@@ -4,6 +4,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Product>Blazor Common</Product>
+        <Description>A repository containing Blazor Components I've made which I commonly use in other projects.</Description>
+        <PackageId>Blazor.Common</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Hunter Freeman</Authors>
+        <Company />
+        <PackageTags>DotNet CSharp Blazor RazorComponents</PackageTags>
     </PropertyGroup>
 
 
