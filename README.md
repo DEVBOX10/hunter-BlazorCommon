@@ -1,8 +1,5 @@
 # BlazorCommon
 
-Demo website:
-The demo website was taken down to save money.
-
 ![Example GIF](/Media/Gifs/root-readme-gif.gif)
 
 ***BlazorCommon*** is a general case component library using
