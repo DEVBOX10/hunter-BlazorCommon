@@ -3,7 +3,6 @@ using BlazorCommon.RazorLib.TreeView.Events;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 
 namespace BlazorCommon.RazorLib.TreeView.Displays;
 
@@ -34,8 +33,6 @@ public partial class TreeViewDisplay : ComponentBase
 
     private ElementReference? _treeViewTitleElementReference;
     private TreeViewChangedKey _previousTreeViewChangedKey = TreeViewChangedKey.Empty;
-
-    private bool _previousIsSelected;
     private bool _previousIsActive;
     
     private int OffsetInPixels => OffsetPerDepthInPixels * Depth;

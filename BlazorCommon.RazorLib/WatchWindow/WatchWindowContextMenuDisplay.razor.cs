@@ -1,9 +1,7 @@
 ﻿using System.Collections.Immutable;
-using BlazorCommon.RazorLib.BackgroundTaskCase;
 using BlazorCommon.RazorLib.Menu;
 using BlazorCommon.RazorLib.TreeView;
 using BlazorCommon.RazorLib.TreeView.Commands;
-using Fluxor;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorCommon.RazorLib.WatchWindow;
@@ -12,11 +10,7 @@ public partial class WatchWindowContextMenuDisplay : ComponentBase
 {
     [Inject]
     private ITreeViewService TreeViewService { get; set; } = null!;
-    [Inject]
-    private IBackgroundTaskQueue BackgroundTaskQueue { get; set; } = null!;
-    [Inject]
-    private IDispatcher Dispatcher { get; set; } = null!;
-    
+
     [Parameter, EditorRequired]
     public ITreeViewCommandParameter TreeViewCommandParameter { get; set; } = null!;
     

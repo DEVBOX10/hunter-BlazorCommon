@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace BlazorCommon.RazorLib.Reactive;
 
 public class Throttle<TEventArgs> : IThrottle<TEventArgs>
@@ -21,9 +23,7 @@ public class Throttle<TEventArgs> : IThrottle<TEventArgs>
         CancellationToken externalCancellationToken)
     {
         CancellationToken throttleCancellationToken;
-        
-        await Task.Yield();
-        
+
         lock (_syncRoot)
         {
             _eventArgsStack.Push(eventArgs);
@@ -45,6 +45,9 @@ public class Throttle<TEventArgs> : IThrottle<TEventArgs>
             {
                 return (default, true);
             }
+            
+            // WebAssembly Single Threaded
+            await Task.Yield();
 
             lock (_syncRoot)
             {

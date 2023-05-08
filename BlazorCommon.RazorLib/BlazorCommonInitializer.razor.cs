@@ -1,5 +1,4 @@
 ﻿using BlazorCommon.RazorLib.Options;
-using BlazorCommon.RazorLib.Theme;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorCommon.RazorLib;
