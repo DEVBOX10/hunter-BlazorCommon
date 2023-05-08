@@ -22,8 +22,6 @@ public class Throttle<TEventArgs> : IThrottle<TEventArgs>
     {
         CancellationToken throttleCancellationToken;
         
-        await Task.Yield();
-        
         lock (_syncRoot)
         {
             _eventArgsStack.Push(eventArgs);
