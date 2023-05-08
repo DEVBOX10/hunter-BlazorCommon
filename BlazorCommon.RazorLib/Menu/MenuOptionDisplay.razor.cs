@@ -34,11 +34,7 @@ public partial class MenuOptionDisplay : ComponentBase
     private string IsActiveCssClass => IsActive
         ? "bcrl_active"
         : string.Empty;
-    
-    private string HasSubmenuActiveCssClass => HasSubmenuActive
-            ? "bcrl_active"
-            : string.Empty;
-    
+
     private string HasWidgetActiveCssClass => _shouldDisplayWidget && 
                                               MenuOptionRecord.WidgetRendererType is not null
         ? "bcrl_active"

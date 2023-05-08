@@ -12,11 +12,7 @@ public partial class WatchWindowContextMenuDisplay : ComponentBase
 {
     [Inject]
     private ITreeViewService TreeViewService { get; set; } = null!;
-    [Inject]
-    private IBackgroundTaskQueue BackgroundTaskQueue { get; set; } = null!;
-    [Inject]
-    private IDispatcher Dispatcher { get; set; } = null!;
-    
+
     [Parameter, EditorRequired]
     public ITreeViewCommandParameter TreeViewCommandParameter { get; set; } = null!;
     

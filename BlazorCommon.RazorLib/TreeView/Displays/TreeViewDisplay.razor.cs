@@ -34,8 +34,6 @@ public partial class TreeViewDisplay : ComponentBase
 
     private ElementReference? _treeViewTitleElementReference;
     private TreeViewChangedKey _previousTreeViewChangedKey = TreeViewChangedKey.Empty;
-
-    private bool _previousIsSelected;
     private bool _previousIsActive;
     
     private int OffsetInPixels => OffsetPerDepthInPixels * Depth;

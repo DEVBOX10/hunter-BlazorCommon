@@ -18,9 +18,7 @@ public partial class NotificationDisplay : ComponentBase, IDisposable
     private IState<AppOptionsState> AppOptionsStateWrap { get; set; } = null!;
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
-    [Inject]
-    private IBackgroundTaskQueue BackgroundTaskQueue { get; set; } = null!;
-    
+
     [Parameter, EditorRequired]
     public NotificationRecord NotificationRecord { get; set; } = null!;
     [Parameter, EditorRequired]
