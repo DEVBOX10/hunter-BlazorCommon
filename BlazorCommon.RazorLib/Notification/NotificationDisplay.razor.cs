@@ -1,9 +1,7 @@
 ﻿using System.Text;
-using BlazorCommon.RazorLib.BackgroundTaskCase;
 using BlazorCommon.RazorLib.Dialog;
 using BlazorCommon.RazorLib.Dimensions;
 using BlazorCommon.RazorLib.Html;
-using BlazorCommon.RazorLib.Options;
 using BlazorCommon.RazorLib.Store.ApplicationOptions;
 using BlazorCommon.RazorLib.Store.DialogCase;
 using BlazorCommon.RazorLib.Store.NotificationCase;

@@ -3,7 +3,6 @@ using BlazorCommon.RazorLib.TreeView.Events;
 using BlazorCommon.RazorLib.TreeView.TreeViewClasses;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 
 namespace BlazorCommon.RazorLib.TreeView.Displays;
 
