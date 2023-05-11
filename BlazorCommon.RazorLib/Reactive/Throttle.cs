@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace BlazorCommon.RazorLib.Reactive;
 
 public class Throttle<TEventArgs> : IThrottle<TEventArgs>
