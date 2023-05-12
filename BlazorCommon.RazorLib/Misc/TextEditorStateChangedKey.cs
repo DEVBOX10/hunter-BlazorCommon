@@ -1,16 +1,12 @@
 namespace BlazorCommon.RazorLib.Misc;
 
-/// <summary>
-/// Used to re-render the UI.
-/// This middle man to re-render the UI is necessary otherwise there would be an infinite render loop
-/// because OnAfterRenderAsync modifies the ViewModel at times for an example.
-/// </summary>
-public record TextEditorStateChangedKey(Guid Guid)
+/// <summary>Used to re-render Blazor Components. If a <see cref="RenderStateKey"/> value changes, then the given Blazor Component should re-render.</summary>
+public record RenderStateKey(Guid Guid)
 {
-    public static readonly TextEditorStateChangedKey Empty = new TextEditorStateChangedKey(Guid.Empty);
+    public static readonly RenderStateKey Empty = new RenderStateKey(Guid.Empty);
 
-    public static TextEditorStateChangedKey NewTextEditorStateChangedKey()
+    public static RenderStateKey NewRenderStateKey()
     {
-        return new TextEditorStateChangedKey(Guid.NewGuid());
+        return new RenderStateKey(Guid.NewGuid());
     }
 }
